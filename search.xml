@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Git和GitHub基本使用</title>
+    <url>/2023/12/13/Git%E5%92%8CGitHub%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h2 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h2><p>GitHub是全球最大的同行交友网站。DX</p>
+]]></content>
+      <tags>
+        <tag>Git</tag>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hexo博客搭建流程</title>
     <url>/2023/12/11/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/</url>
     <content><![CDATA[<p>此文章用于记录本博客搭建过程及一些心得体会，本博客的搭建采用以下对象：</p>
@@ -12,7 +22,8 @@
 <li><p>GitHub：目标是构建一个静态博客，所以采用GitHub Page来部署，图床也使用Github。</p>
 </li>
 </ul>
-<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><h3 id="安装Node-js和npm"><a href="#安装Node-js和npm" class="headerlink" title="安装Node.js和npm"></a>安装Node.js和npm</h3><p>要搭建静态博客，Hexo是一个不错的框架。在安装Hexo之前，需要下载Node.js，Node.js是一个开源的，跨平台的javascript运行时环境，通俗的说，就是一个js库，要把这个js库放到全局环境中，才能使用相应Node命令。</p>
+<p>Get：—<a href=#a>npm</a>	—<a href=#b>博客导航栏问题</a>	—<a href=#c>Git Page原理</a></p>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备<a id="a"></a></h2><h3 id="安装Node-js和npm"><a href="#安装Node-js和npm" class="headerlink" title="安装Node.js和npm"></a>安装Node.js和npm</h3><p>要搭建静态博客，Hexo是一个不错的框架。在安装Hexo之前，需要下载Node.js，Node.js是一个开源的，跨平台的javascript运行时环境，通俗的说，就是一个js库，要把这个js库放到全局环境中，才能使用相应Node命令。</p>
 <ul>
 <li>Node.js官网：<a href="https://nodejs.org/">https://nodejs.org</a></li>
 </ul>
@@ -32,7 +43,7 @@
 <figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> npm root <span class="literal">-g</span></span><br></pre></td></tr></table></figure>
 
 <p>比如我的路径</p>
-<p><img src="https://raw.githubusercontent.com/scazzh/blogpic//main/pic/image-20231213163642745.png" alt="image-20231213163642745"></p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213163642745.png" alt="image-20231213163642745"></p>
 <p>根据安装路径查看文件夹可以发现：</p>
 <p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213163700336.png" alt="image-20231213163700336"></p>
 <p>刚刚安装好的hexo-cli文件夹存放在这里。</p>
@@ -110,14 +121,14 @@
 <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">butterfly</span>	<span class="comment">#在_config.yml中按ctrl+f搜索theme，快速定位</span></span><br></pre></td></tr></table></figure>
 
 <p>在工程目录主页新建bufferfly主题配置文件_config.butterfly.yml，找到node_modules&#x2F;hexo-theme-butterfly&#x2F;_config.yml将内容复制到_config.butterfly.yml。</p>
-<p>butterfly的默认配置就非常棒，如果要个性化配置参考：<a href="https://butterfly.js.org/posts/4aa8abbe/">Butterfly 安裝文檔(三) 主題配置-1 | Butterfly</a></p>
+<p>butterfly的默认配置就非常棒，如果要个性化配置参考：<a href="https://butterfly.js.org/posts/4aa8abbe/">Butterfly 安裝文檔(三) 主題配置-1 | Butterfly</a><a id="b"></a></p>
 <blockquote>
 <p>导航栏中的页面都需要初始化：执行hexo new page “xxx”，再在source文件中新增的相应文件中进行配置。</p>
 <p>不论page还是post，它们其实都是一个页面，只是由不同模板生成，然后主题中的js在对不同的页面做不同的事，比如文章（post）显示一部分在主页，点开全页显示。标签（tags）显示所有文章中出现的tags。所以tags模板中不能有内容。</p>
 </blockquote>
 <p>写文章的步骤还是<a href=#write>上面</a>和一样。</p>
 <h3 id="交互"><a href="#交互" class="headerlink" title="交互"></a>交互</h3><p>留言和评论需要第三方的方式实现，暂时不考虑。</p>
-<h2 id="部署到GitHub"><a href="#部署到GitHub" class="headerlink" title="部署到GitHub"></a>部署到GitHub</h2><p>Git及GitHub基础操作参考：<a>Git和GitHub的基本使用</a></p>
+<h2 id="部署到GitHub"><a href="#部署到GitHub" class="headerlink" title="部署到GitHub"></a>部署到GitHub</h2><p>Git及GitHub基础操作参考：<a href="https://scazzh.github.io/">Git和GitHub的基本使用</a></p>
 <p>GitHub Page官方说明：<a href="https://pages.github.com/">GitHub Pages | Websites for you and your projects, hosted directly from your GitHub repository. Just edit, push, and your changes are live.</a></p>
 <p>在GitHub新建Repository，勾选Add a README file可以快速初始化一个仓库。必须命名为</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">自定义名称.github.io</span><br></pre></td></tr></table></figure>
@@ -129,6 +140,19 @@
 <p>然后执行</p>
 <figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> hexo clean  <span class="comment">#清除以前的静态文件</span></span><br><span class="line"><span class="variable">$</span> hexo generate  <span class="comment"># hexo g</span></span><br><span class="line"><span class="variable">$</span> hexo deploy	<span class="comment"># hexo d</span></span><br><span class="line"><span class="comment"># 后两步操作可以简写 hexo g -d</span></span><br></pre></td></tr></table></figure>
 
+<p>成功提示如下，项目已经推送到目标仓库的master分支上</p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213223608595.png" alt="image-20231213223608595"></p>
+<p>点击GitHub仓库界面的Settings，选择左侧栏的Page，选择master&#x2F;(root)，这取决于上传的分支。</p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213224427303.png" alt="11"></p>
+<p>然后就可以通过之前设置的域名访问了。</p>
+<p>写博客及上传的流程：<a id="c"></a></p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> hexo new post <span class="string">&quot;demo&quot;</span></span><br><span class="line"><span class="comment">## 在_post文件夹中生成的demo.md中用markdown语法编写文章</span></span><br><span class="line"><span class="variable">$</span> hexo clean	<span class="comment">#清除缓存(publish文件夹)</span></span><br><span class="line"><span class="variable">$</span> hexo g <span class="literal">-d</span>    	<span class="comment">#生成静态文件并部署</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>GitHub Page的原理：根据官方说明可知，GitHub Page其实是解析的index.html文件的内容并显示。通过项目仓库的文件目录可以看到hexo为每个文章单独创建了一个文件夹，每个文件夹中都有一个index.html。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213225606436.png" alt="image-20231213225606436"></p>
+<p>到此，搭建过程结束。</p>
 ]]></content>
       <tags>
         <tag>Hexo</tag>
@@ -137,34 +161,9 @@
       </tags>
   </entry>
   <entry>
-    <title>启</title>
-    <url>/2023/12/12/%E5%90%AF/</url>
-    <content><![CDATA[<blockquote>
-<p>业精于勤，荒于嬉；行成于思，毁于随。						——【唐】韩愈《进学解》</p>
-</blockquote>
-<blockquote>
-<p>不积跬步，无以至千里；不积小流，无以成江海。		——【战国】荀子《劝学》</p>
-</blockquote>
-<p>要说为什么想写博客，其主要的原因是自己总是学多积少，又很懒，但是野心很大，什么都想学，但是总是不积累，不积累就不容易反思，不容易反思就导致自己总是在门外徘徊，刚进门尝到了甜头就开始原地享受，最终发现自己学什么都是半吊子。</p>
-<p>以前认为写博客是很浪费时间的行为，写的东西也大多是知识点，相当于把百度百科移植了一般，就算自己写了文章也很少会回头看，越写越没有动力，味同嚼蜡。这种循环怎么能让人坚持下去呢。</p>
-<p>直到自己真正做完一个项目，用心的写完自己一步步实践的过程和过程中遇到的问题的解决方法与反思，一看时间已是凌晨2点多，但是奇怪的是自己并不累，而且感觉到十分满足的时候，我才明白什么是高级的快乐。</p>
-<blockquote>
-<p>学而不思则罔，思而不学则殆。									——【春秋】《论语·为政》</p>
-</blockquote>
-<p>圣人不愧是圣人，只有自己亲身体会，才能感悟话中的含义。</p>
-]]></content>
-      <categories>
-        <category>感悟</category>
-      </categories>
-      <tags>
-        <tag>杂谈</tag>
-        <tag>非技术</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Roll A Ball</title>
     <url>/2023/12/12/Roll%20A%20Ball%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<p>Get：<a href="#a">urp配置文件</a>	<a href="b">Material</a>	<a href="c">Smoothness</a>	<a href="d">Input System</a>	<a href=#e>Rigidbody（刚体）</a>	<a href="f">OnMove(InputValue input)</a>	<a href="g">碰撞体(Collider)</a>	<a href="h">层级管理</a>	<a href="i">OnTriggerEnter(Collider other)</a>	<a href="j">Tag</a>	<a href="k">CompareTag</a>	<a href="l">Prefab(预制体)</a>	<a href="m">UI</a>	<a href="n">Text-TextMeshPro</a>	<a href="o">Rect Transform</a>	<a href="p">pivot</a></p>
+    <content><![CDATA[<p>Get：—<a href="#a">urp配置文件</a>	—<a href=#b>Material</a>	—<a href=#c>Smoothness</a>	—<a href=#d>Input System</a>	—<a href=#e>Rigidbody（刚体）</a>	—<a href=#f>OnMove(InputValue input)</a>	—<a href=#g>碰撞体(Collider)</a>	—<a href=#h>层级管理</a>	—<a href=#i>OnTriggerEnter(Collider other)</a>	—<a href=#j>Tag</a>	—<a href=#k>CompareTag</a>	—<a href=#l>Prefab(预制体)</a>	—<a href=#m>UI</a>	—<a href=#n>Text-TextMeshPro</a>	—<a href=#o>Rect Transform</a>	—<a href=#p>pivot</a></p>
 <blockquote>
 <p>游戏简介</p>
 </blockquote>
@@ -309,6 +308,59 @@
         <tag>Unity3D基础</tag>
         <tag>简单小游戏</tag>
         <tag>教程学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>博客问题总结</title>
+    <url>/2023/12/11/%E5%8D%9A%E5%AE%A2%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<blockquote>
+<p>此文用以记录搭建和使用博客中遇到的问题</p>
+</blockquote>
+<h2 id="图床问题"><a href="#图床问题" class="headerlink" title="图床问题"></a>图床问题</h2><p>图床问题是静态博客都会遇到的问题。因为文章采用Markdown语法，所以文章中的图片使用url来引用，可以使用本地地址或网络地址，要在网络中显示就必须使用网络地址。所以必须要有一个存放图片的地方。</p>
+<p>本博客使用图床：GitHub（有时访问会很慢）</p>
+<p>搜索了很多免费图床，大多都存在不稳定或有跑路可能（导致图片全体丢失，如果没有备份后果会很严重）。综合来说，虽然GitHub作为图床有时访问会比较慢，但是它几乎不可能跑路，并且不限空间，使用非常方便。不过GitHub作为图床的仓库将会是公开的，所以如果十分注重隐私的话建议选择其他图床。</p>
+<p>图床上传工具PicGo</p>
+<ul>
+<li><a href="https://picgo.github.io/PicGo-Doc/zh/">PicGo</a></li>
+</ul>
+<p>它支持以GitHub作为图床，配置简单，并且Typora也支持PicGo上传图片，可谓是一条龙服务。</p>
+<p>Typora设置：</p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213232651986.png" alt="image-20231213232651986"></p>
+<p>PicGo设置：<br><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213233108701.png" alt="image-20231213233108701"></p>
+<blockquote>
+<p>Token在账户的Settings（点击右上角头像）里的Developer Settings里生成，生成的Token要立即复制备份，它只会显示一次。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213233617099.png" alt="image-20231213233617099"></p>
+<p>自定义域名：图片的url，用于访问图片。</p>
+<p>GitHub图床访问格式：<a href="https://raw.githubusercontent.com/%E7%94%A8%E6%88%B7%E5%90%8D/%E4%BB%93%E5%BA%93%E5%90%8D/%E5%88%86%E6%94%AF">https://raw.githubusercontent.com/用户名/仓库名/分支</a></p>
+]]></content>
+      <categories>
+        <category>问题</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>启</title>
+    <url>/2023/12/12/%E5%90%AF/</url>
+    <content><![CDATA[<blockquote>
+<p>业精于勤，荒于嬉；行成于思，毁于随。						——【唐】韩愈《进学解》</p>
+</blockquote>
+<blockquote>
+<p>不积跬步，无以至千里；不积小流，无以成江海。		——【战国】荀子《劝学》</p>
+</blockquote>
+<p>要说为什么想写博客，其主要的原因是自己总是学多积少，又很懒，但是野心很大，什么都想学，但是总是不积累，不积累就不容易反思，不容易反思就导致自己总是在门外徘徊，刚进门尝到了甜头就开始原地享受，最终发现自己学什么都是半吊子。</p>
+<p>以前认为写博客是很浪费时间的行为，写的东西也大多是知识点，相当于把百度百科移植了一般，就算自己写了文章也很少会回头看，越写越没有动力，味同嚼蜡。这种循环怎么能让人坚持下去呢。</p>
+<p>直到自己真正做完一个项目，用心的写完自己一步步实践的过程和过程中遇到的问题的解决方法与反思，一看时间已是凌晨2点多，但是奇怪的是自己并不累，而且感觉到十分满足的时候，我才明白什么是高级的快乐。</p>
+<blockquote>
+<p>学而不思则罔，思而不学则殆。									——【春秋】《论语·为政》</p>
+</blockquote>
+<p>圣人不愧是圣人，只有自己亲身体会，才能感悟话中的含义。</p>
+]]></content>
+      <categories>
+        <category>感悟</category>
+      </categories>
+      <tags>
+        <tag>杂谈</tag>
+        <tag>非技术</tag>
       </tags>
   </entry>
 </search>

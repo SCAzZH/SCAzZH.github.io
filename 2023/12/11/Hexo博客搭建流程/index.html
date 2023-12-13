@@ -1,0 +1,284 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Hexo博客搭建流程 | 学习之路</title><meta name="author" content="Zzh"><meta name="copyright" content="Zzh"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="此文章用于记录本博客搭建过程及一些心得体会，本博客的搭建采用以下对象：  Hexo：使用Hexo框架快速构建博客。  Butterfly：采用Butterfly主题。（备选Next、Keep）  GitHub：目标是构建一个静态博客，所以采用GitHub Page来部署，图床也使用Github。   准备安装Node.js和npm要搭建静态博客，Hexo是一个不错的框架。在安装Hexo之前，需要下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo博客搭建流程">
+<meta property="og:url" content="http://scazzh.github.io/2023/12/11/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/index.html">
+<meta property="og:site_name" content="学习之路">
+<meta property="og:description" content="此文章用于记录本博客搭建过程及一些心得体会，本博客的搭建采用以下对象：  Hexo：使用Hexo框架快速构建博客。  Butterfly：采用Butterfly主题。（备选Next、Keep）  GitHub：目标是构建一个静态博客，所以采用GitHub Page来部署，图床也使用Github。   准备安装Node.js和npm要搭建静态博客，Hexo是一个不错的框架。在安装Hexo之前，需要下">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://scazzh.github.io/imgs/icon/shop.png">
+<meta property="article:published_time" content="2023-12-11T13:05:27.000Z">
+<meta property="article:modified_time" content="2023-12-13T14:34:35.634Z">
+<meta property="article:author" content="Zzh">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Butterfly主题">
+<meta property="article:tag" content="GitHub">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://scazzh.github.io/imgs/icon/shop.png"><link rel="shortcut icon" href="/imgs/icon/fight.png"><link rel="canonical" href="http://scazzh.github.io/2023/12/11/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Hexo博客搭建流程',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-12-13 22:34:35'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/imgs/icon/shop.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="学习之路"><img class="site-icon" src="/imgs/icon/fight.png"/><span class="site-name">学习之路</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Hexo博客搭建流程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-12-11T13:05:27.000Z" title="发表于 2023-12-11 21:05:27">2023-12-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-12-13T14:34:35.634Z" title="更新于 2023-12-13 22:34:35">2023-12-13</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Hexo博客搭建流程"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>此文章用于记录本博客搭建过程及一些心得体会，本博客的搭建采用以下对象：</p>
+<ul>
+<li><p>Hexo：使用Hexo框架快速构建博客。</p>
+</li>
+<li><p>Butterfly：采用Butterfly主题。（备选Next、Keep）</p>
+</li>
+<li><p>GitHub：目标是构建一个静态博客，所以采用GitHub Page来部署，图床也使用Github。</p>
+</li>
+</ul>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><h3 id="安装Node-js和npm"><a href="#安装Node-js和npm" class="headerlink" title="安装Node.js和npm"></a>安装Node.js和npm</h3><p>要搭建静态博客，Hexo是一个不错的框架。在安装Hexo之前，需要下载Node.js，Node.js是一个开源的，跨平台的javascript运行时环境，通俗的说，就是一个js库，要把这个js库放到全局环境中，才能使用相应Node命令。</p>
+<ul>
+<li>Node.js官网：<a target="_blank" rel="noopener" href="https://nodejs.org/">https://nodejs.org</a></li>
+</ul>
+<p>安装好后可以在Windows的cmd里敲node -v，安装成功会提示：node的版本号。</p>
+<div class="note info simple"><p>建议使用node最新的LTS版（长期支持版）。</p>
+</div>
+
+<p>安装好Node后，需要安装npm（Node Package Manager），npm是一个包管理器，许多框架都托管在npm服务器上。使用npm，只需要几行命令就可以把开发需要的依赖包，环境等安装部署到本地，非常强大。</p>
+<ul>
+<li>npm中文文档：<a target="_blank" rel="noopener" href="https://nodejs.cn/npm/about-npm/">npm 中文文档 (nodejs.cn)</a></li>
+</ul>
+<p>在访问一个框架的安装文档时，一般都会有类似以下的代码</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> npm install hexo<span class="literal">-cli</span> <span class="literal">-g</span></span><br></pre></td></tr></table></figure>
+
+<p>这是npm的一个命令，意思是node package manager install hexo-cli -global，node包管理器全局安装hexo-cli，hexo-cli是hexo官网提供的hexo环境。只需要一个命令就可以将hexo环境安装到全局。</p>
+<p>输入命令回车后几秒钟就执行完成了，对于萌新来说可能不知道发生了什么。使用以下命令可以查看npm的全局安装路径</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> npm root <span class="literal">-g</span></span><br></pre></td></tr></table></figure>
+
+<p>比如我的路径</p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic//main/pic/image-20231213163642745.png" alt="image-20231213163642745"></p>
+<p>根据安装路径查看文件夹可以发现：</p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213163700336.png" alt="image-20231213163700336"></p>
+<p>刚刚安装好的hexo-cli文件夹存放在这里。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="Hexo初始化"><a href="#Hexo初始化" class="headerlink" title="Hexo初始化"></a>Hexo初始化</h3><div class="note info simple"><p>现在已经有了全局Hexo环境，可以使用Hexo命令了。</p>
+</div>
+
+<p>可以在任意文件夹构建博客。比如我在桌面创建一个文件夹，打开它然后在此位置打开cmd，点击导航框，在文件夹目录前加cmd，然后运行</p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213165208104.png" alt="image-20231213165208104"></p>
+<p>在cmd中输入</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> hexo init blog   </span><br></pre></td></tr></table></figure>
+
+<div class="note info simple"><p>这个blog是博客工程目录的名称，可以更改</p>
+</div>
+
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> <span class="built_in">cd</span> blog	<span class="comment">#意思是进入blog这个文件，如果改过名，则用之前自定义的名称</span></span><br><span class="line"><span class="variable">$</span> npm install  <span class="comment">#npm安装hexo所需的相关文件，命令执行后自动安装 </span></span><br><span class="line"><span class="variable">$</span> hexo server  <span class="comment">#启动hexo，默认地址http://localhost:4000</span></span><br></pre></td></tr></table></figure>
+
+<p>命令执行完后，成功提示如下:</p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213172707285.png" alt="image-20231213172707285"></p>
+<p>访问<a href="http://localhost:4000，本地博客已经部署完成。">http://localhost:4000，本地博客已经部署完成。</a></p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><div class="note info simple"><p>从此处起以hexo默认主题landscape为准。</p>
+</div>
+
+<h3 id="写博客"><a href="#写博客" class="headerlink" title="写博客"></a>写博客<a id="write"></a></h3><p>在blog文件夹下的cmd中输入</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> hexo new post <span class="string">&quot;文章名&quot;</span>   <span class="comment">#输入要写的文章名</span></span><br><span class="line"><span class="comment"># 比如：hexo new post &quot;Test&quot;  执行后会在source/_post文件夹中生成Test.md文件</span></span><br></pre></td></tr></table></figure>
+
+<div class="note info simple"><p>md后缀文件是Markdown文本文件，Markdown是一种以符号结构规则定义格式的文本语法，很容易上手。推荐使用Typora（付费）来写博客。</p>
+</div>
+
+<ul>
+<li><p>MarkDown基本语法：<a target="_blank" rel="noopener" href="https://markdown.com.cn/basic-syntax/">Markdown 基本语法 | Markdown 官方教程</a></p>
+</li>
+<li><p>Typora：<a target="_blank" rel="noopener" href="https://typoraio.cn/">Typora 官方中文站 (typoraio.cn)</a></p>
+</li>
+</ul>
+<p>打开Test.md就可以写博客了。在post文件夹下的文章会直接显示在博客上，无论写完与否。</p>
+<p>也可以新建草稿页draft</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> hexo new draft <span class="string">&quot;name&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>写好后，发布</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> hexo publish draft <span class="string">&quot;name&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>后续写博客都是这样的流程。</p>
+<h3 id="添加新页面（如Tags，Categories）"><a href="#添加新页面（如Tags，Categories）" class="headerlink" title="添加新页面（如Tags，Categories）"></a>添加新页面（如Tags，Categories）</h3><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> hexo new page <span class="string">&quot;页面名称&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>如执行<code>hexo new page "test"</code>后运行，在网址栏中访问<a target="_blank" rel="noopener" href="http://localhost:4000/test%E5%8F%AF%E4%BB%A5%E8%AE%BF%E9%97%AEtest%E9%A1%B5%E9%9D%A2">http://localhost:4000/test可以访问test页面</a></p>
+<blockquote>
+<p>以上操作post、draft、page依据source&#x2F;scaffolds中对应的模板文件生成页面。</p>
+<p>其实它们都是一个页面，只是由不同模板生成。</p>
+</blockquote>
+<p>模板文件中的头部被称为Font-matter:</p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213195443473.png" alt="image-20231213195443473"></p>
+<p>参数项说明：<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/front-matter">Front-matter | Hexo</a></p>
+<h3 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h3><p>大部分人都想要功能全面且简洁美观的博客，我也是如此。Hexo提供的默认主题landscape相对来说比较简约，功能也比较基础。Hexo的官网上有很多主题。经过筛选，我比较喜欢的主题有：</p>
+<ul>
+<li><p>Butterfly（美观，多彩，文档也非常棒）：<a target="_blank" rel="noopener" href="https://butterfly.js.org/">Butterfly - A Simple and Card UI Design theme for Hexo</a></p>
+</li>
+<li><p>Next（简洁，清晰）：<a target="_blank" rel="noopener" href="https://theme-next.js.org/">theme-next.js.org</a></p>
+</li>
+<li><p>Keep（简洁，美观）：<a target="_blank" rel="noopener" href="https://v3.keep-docs.xpoet.cn/">Keep 主题使用手册 | Hexo 主题 Keep 官方文档 (xpoet.cn)</a></p>
+</li>
+</ul>
+<p>我的博客选择的是Butterfly主题，因为它太优秀了。</p>
+<div class="note info simple"><p>从此处起以Bufferfly主题为准。安装和配置只写主要过程，具体参考<a target="_blank" rel="noopener" href="https://butterfly.js.org/posts/21cfbf15/">Butterfly 安裝文檔(一) 快速開始 | Butterfly</a>。</p>
+</div>
+
+
+
+<h3 id="安装-配置"><a href="#安装-配置" class="headerlink" title="安装&amp;配置"></a>安装&amp;配置</h3><p>npm安装：</p>
+<blockquote>
+<p>通过 npm 安装并不会在 themes 里生成主题文件夹，而是在 node_modules 里生成</p>
+</blockquote>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> npm install hexo<span class="literal">-theme-butterfly</span>		<span class="comment">#安装</span></span><br><span class="line"><span class="comment">## 更新 npm update hexo-theme-butterfly</span></span><br></pre></td></tr></table></figure>
+
+<p>将工程目录主页下的_config.yml中的主题改为: butterfly</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">butterfly</span>	<span class="comment">#在_config.yml中按ctrl+f搜索theme，快速定位</span></span><br></pre></td></tr></table></figure>
+
+<p>在工程目录主页新建bufferfly主题配置文件_config.butterfly.yml，找到node_modules&#x2F;hexo-theme-butterfly&#x2F;_config.yml将内容复制到_config.butterfly.yml。</p>
+<p>butterfly的默认配置就非常棒，如果要个性化配置参考：<a target="_blank" rel="noopener" href="https://butterfly.js.org/posts/4aa8abbe/">Butterfly 安裝文檔(三) 主題配置-1 | Butterfly</a></p>
+<blockquote>
+<p>导航栏中的页面都需要初始化：执行hexo new page “xxx”，再在source文件中新增的相应文件中进行配置。</p>
+<p>不论page还是post，它们其实都是一个页面，只是由不同模板生成，然后主题中的js在对不同的页面做不同的事，比如文章（post）显示一部分在主页，点开全页显示。标签（tags）显示所有文章中出现的tags。所以tags模板中不能有内容。</p>
+</blockquote>
+<p>写文章的步骤还是<a href=#write>上面</a>和一样。</p>
+<h3 id="交互"><a href="#交互" class="headerlink" title="交互"></a>交互</h3><p>留言和评论需要第三方的方式实现，暂时不考虑。</p>
+<h2 id="部署到GitHub"><a href="#部署到GitHub" class="headerlink" title="部署到GitHub"></a>部署到GitHub</h2><p>Git及GitHub基础操作参考：<a>Git和GitHub的基本使用</a></p>
+<p>GitHub Page官方说明：<a target="_blank" rel="noopener" href="https://pages.github.com/">GitHub Pages | Websites for you and your projects, hosted directly from your GitHub repository. Just edit, push, and your changes are live.</a></p>
+<p>在GitHub新建Repository，勾选Add a README file可以快速初始化一个仓库。必须命名为</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">自定义名称.github.io</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213222112319.png" alt="image-20231213222112319"></p>
+<p>修改项目工程文件中的_config.yml</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">git@github.com:SCAzZH/scazzh.github.io.git</span>		<span class="comment">#我的github仓库地址</span></span><br></pre></td></tr></table></figure>
+
+<p>然后执行</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> hexo clean  <span class="comment">#清除以前的静态文件</span></span><br><span class="line"><span class="variable">$</span> hexo generate  <span class="comment"># hexo g</span></span><br><span class="line"><span class="variable">$</span> hexo deploy	<span class="comment"># hexo d</span></span><br><span class="line"><span class="comment"># 后两步操作可以简写 hexo g -d</span></span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://scazzh.github.io">Zzh</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://scazzh.github.io/2023/12/11/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/">http://scazzh.github.io/2023/12/11/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://scazzh.github.io" target="_blank">学习之路</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Hexo/">Hexo</a><a class="post-meta__tags" href="/tags/Butterfly%E4%B8%BB%E9%A2%98/">Butterfly主题</a><a class="post-meta__tags" href="/tags/GitHub/">GitHub</a></div><div class="post_share"></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/imgs/icon/shop.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Zzh</div><div class="author-info__description">路漫漫其修远兮</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/SCAzZH"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎喜欢游戏的朋友们</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87"><span class="toc-number">1.</span> <span class="toc-text">准备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Node-js%E5%92%8Cnpm"><span class="toc-number">1.1.</span> <span class="toc-text">安装Node.js和npm</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">2.</span> <span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Hexo%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">2.1.</span> <span class="toc-text">Hexo初始化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%99%E5%8D%9A%E5%AE%A2"><span class="toc-number">3.1.</span> <span class="toc-text">写博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E6%96%B0%E9%A1%B5%E9%9D%A2%EF%BC%88%E5%A6%82Tags%EF%BC%8CCategories%EF%BC%89"><span class="toc-number">3.2.</span> <span class="toc-text">添加新页面（如Tags，Categories）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%8D%A2%E4%B8%BB%E9%A2%98"><span class="toc-number">3.3.</span> <span class="toc-text">更换主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-%E9%85%8D%E7%BD%AE"><span class="toc-number">3.4.</span> <span class="toc-text">安装&amp;配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A4%E4%BA%92"><span class="toc-number">3.5.</span> <span class="toc-text">交互</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E5%88%B0GitHub"><span class="toc-number">4.</span> <span class="toc-text">部署到GitHub</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/12/12/Roll%20A%20Ball%E6%80%BB%E7%BB%93/" title="Roll A Ball">Roll A Ball</a><time datetime="2023-12-12T06:43:56.000Z" title="发表于 2023-12-12 14:43:56">2023-12-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/12/12/%E5%90%AF/" title="启">启</a><time datetime="2023-12-12T01:52:25.000Z" title="发表于 2023-12-12 09:52:25">2023-12-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/12/11/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/" title="Hexo博客搭建流程">Hexo博客搭建流程</a><time datetime="2023-12-11T13:05:27.000Z" title="发表于 2023-12-11 21:05:27">2023-12-11</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 By Zzh</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my blog!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

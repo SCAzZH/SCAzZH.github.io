@@ -11,156 +11,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Hexo博客搭建流程</title>
-    <url>/2023/12/11/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/</url>
-    <content><![CDATA[<p>此文章用于记录本博客搭建过程及一些心得体会，本博客的搭建采用以下对象：</p>
-<ul>
-<li><p>Hexo：使用Hexo框架快速构建博客。</p>
-</li>
-<li><p>Butterfly：采用Butterfly主题。（备选Next、Keep）</p>
-</li>
-<li><p>GitHub：目标是构建一个静态博客，所以采用GitHub Page来部署，图床也使用Github。</p>
-</li>
-</ul>
-<p>Get：—<a href=#a>npm</a>	—<a href=#b>博客导航栏问题</a>	—<a href=#c>Git Page原理</a></p>
-<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备<a id="a"></a></h2><h3 id="安装Node-js和npm"><a href="#安装Node-js和npm" class="headerlink" title="安装Node.js和npm"></a>安装Node.js和npm</h3><p>要搭建静态博客，Hexo是一个不错的框架。在安装Hexo之前，需要下载Node.js，Node.js是一个开源的，跨平台的javascript运行时环境，通俗的说，就是一个js库，要把这个js库放到全局环境中，才能使用相应Node命令。</p>
-<ul>
-<li>Node.js官网：<a href="https://nodejs.org/">https://nodejs.org</a></li>
-</ul>
-<p>安装好后可以在Windows的cmd里敲node -v，安装成功会提示：node的版本号。</p>
-<div class="note info simple"><p>建议使用node最新的LTS版（长期支持版）。</p>
-</div>
-
-<p>安装好Node后，需要安装npm（Node Package Manager），npm是一个包管理器，许多框架都托管在npm服务器上。使用npm，只需要几行命令就可以把开发需要的依赖包，环境等安装部署到本地，非常强大。</p>
-<ul>
-<li>npm中文文档：<a href="https://nodejs.cn/npm/about-npm/">npm 中文文档 (nodejs.cn)</a></li>
-</ul>
-<p>在访问一个框架的安装文档时，一般都会有类似以下的代码</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> npm install hexo<span class="literal">-cli</span> <span class="literal">-g</span></span><br></pre></td></tr></table></figure>
-
-<p>这是npm的一个命令，意思是node package manager install hexo-cli -global，node包管理器全局安装hexo-cli，hexo-cli是hexo官网提供的hexo环境。只需要一个命令就可以将hexo环境安装到全局。</p>
-<p>输入命令回车后几秒钟就执行完成了，对于萌新来说可能不知道发生了什么。使用以下命令可以查看npm的全局安装路径</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> npm root <span class="literal">-g</span></span><br></pre></td></tr></table></figure>
-
-<p>比如我的路径</p>
-<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213163642745.png" alt="image-20231213163642745"></p>
-<p>根据安装路径查看文件夹可以发现：</p>
-<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213163700336.png" alt="image-20231213163700336"></p>
-<p>刚刚安装好的hexo-cli文件夹存放在这里。</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="Hexo初始化"><a href="#Hexo初始化" class="headerlink" title="Hexo初始化"></a>Hexo初始化</h3><div class="note info simple"><p>现在已经有了全局Hexo环境，可以使用Hexo命令了。</p>
-</div>
-
-<p>可以在任意文件夹构建博客。比如我在桌面创建一个文件夹，打开它然后在此位置打开cmd，点击导航框，在文件夹目录前加cmd，然后运行</p>
-<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213165208104.png" alt="image-20231213165208104"></p>
-<p>在cmd中输入</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> hexo init blog   </span><br></pre></td></tr></table></figure>
-
-<div class="note info simple"><p>这个blog是博客工程目录的名称，可以更改</p>
-</div>
-
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> <span class="built_in">cd</span> blog	<span class="comment">#意思是进入blog这个文件，如果改过名，则用之前自定义的名称</span></span><br><span class="line"><span class="variable">$</span> npm install  <span class="comment">#npm安装hexo所需的相关文件，命令执行后自动安装 </span></span><br><span class="line"><span class="variable">$</span> hexo server  <span class="comment">#启动hexo，默认地址http://localhost:4000</span></span><br></pre></td></tr></table></figure>
-
-<p>命令执行完后，成功提示如下:</p>
-<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213172707285.png" alt="image-20231213172707285"></p>
-<p>访问<a href="http://localhost:4000，本地博客已经部署完成。">http://localhost:4000，本地博客已经部署完成。</a></p>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><div class="note info simple"><p>从此处起以hexo默认主题landscape为准。</p>
-</div>
-
-<h3 id="写博客"><a href="#写博客" class="headerlink" title="写博客"></a>写博客<a id="write"></a></h3><p>在blog文件夹下的cmd中输入</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> hexo new post <span class="string">&quot;文章名&quot;</span>   <span class="comment">#输入要写的文章名</span></span><br><span class="line"><span class="comment"># 比如：hexo new post &quot;Test&quot;  执行后会在source/_post文件夹中生成Test.md文件</span></span><br></pre></td></tr></table></figure>
-
-<div class="note info simple"><p>md后缀文件是Markdown文本文件，Markdown是一种以符号结构规则定义格式的文本语法，很容易上手。推荐使用Typora（付费）来写博客。</p>
-</div>
-
-<ul>
-<li><p>MarkDown基本语法：<a href="https://markdown.com.cn/basic-syntax/">Markdown 基本语法 | Markdown 官方教程</a></p>
-</li>
-<li><p>Typora：<a href="https://typoraio.cn/">Typora 官方中文站 (typoraio.cn)</a></p>
-</li>
-</ul>
-<p>打开Test.md就可以写博客了。在post文件夹下的文章会直接显示在博客上，无论写完与否。</p>
-<p>也可以新建草稿页draft</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> hexo new draft <span class="string">&quot;name&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>写好后，发布</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> hexo publish draft <span class="string">&quot;name&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>后续写博客都是这样的流程。</p>
-<h3 id="添加新页面（如Tags，Categories）"><a href="#添加新页面（如Tags，Categories）" class="headerlink" title="添加新页面（如Tags，Categories）"></a>添加新页面（如Tags，Categories）</h3><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> hexo new page <span class="string">&quot;页面名称&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>如执行<code>hexo new page "test"</code>后运行，在网址栏中访问<a href="http://localhost:4000/test%E5%8F%AF%E4%BB%A5%E8%AE%BF%E9%97%AEtest%E9%A1%B5%E9%9D%A2">http://localhost:4000/test可以访问test页面</a></p>
-<blockquote>
-<p>以上操作post、draft、page依据source&#x2F;scaffolds中对应的模板文件生成页面。</p>
-<p>其实它们都是一个页面，只是由不同模板生成。</p>
-</blockquote>
-<p>模板文件中的头部被称为Font-matter:</p>
-<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213195443473.png" alt="image-20231213195443473"></p>
-<p>参数项说明：<a href="https://hexo.io/zh-cn/docs/front-matter">Front-matter | Hexo</a></p>
-<h3 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h3><p>大部分人都想要功能全面且简洁美观的博客，我也是如此。Hexo提供的默认主题landscape相对来说比较简约，功能也比较基础。Hexo的官网上有很多主题。经过筛选，我比较喜欢的主题有：</p>
-<ul>
-<li><p>Butterfly（美观，多彩，文档也非常棒）：<a href="https://butterfly.js.org/">Butterfly - A Simple and Card UI Design theme for Hexo</a></p>
-</li>
-<li><p>Next（简洁，清晰）：<a href="https://theme-next.js.org/">theme-next.js.org</a></p>
-</li>
-<li><p>Keep（简洁，美观）：<a href="https://v3.keep-docs.xpoet.cn/">Keep 主题使用手册 | Hexo 主题 Keep 官方文档 (xpoet.cn)</a></p>
-</li>
-</ul>
-<p>我的博客选择的是Butterfly主题，因为它太优秀了。</p>
-<div class="note info simple"><p>从此处起以Bufferfly主题为准。安装和配置只写主要过程，具体参考<a href="https://butterfly.js.org/posts/21cfbf15/">Butterfly 安裝文檔(一) 快速開始 | Butterfly</a>。</p>
-</div>
-
-
-
-<h3 id="安装-配置"><a href="#安装-配置" class="headerlink" title="安装&amp;配置"></a>安装&amp;配置</h3><p>npm安装：</p>
-<blockquote>
-<p>通过 npm 安装并不会在 themes 里生成主题文件夹，而是在 node_modules 里生成</p>
-</blockquote>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> npm install hexo<span class="literal">-theme-butterfly</span>		<span class="comment">#安装</span></span><br><span class="line"><span class="comment">## 更新 npm update hexo-theme-butterfly</span></span><br></pre></td></tr></table></figure>
-
-<p>将工程目录主页下的_config.yml中的主题改为: butterfly</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">butterfly</span>	<span class="comment">#在_config.yml中按ctrl+f搜索theme，快速定位</span></span><br></pre></td></tr></table></figure>
-
-<p>在工程目录主页新建bufferfly主题配置文件_config.butterfly.yml，找到node_modules&#x2F;hexo-theme-butterfly&#x2F;_config.yml将内容复制到_config.butterfly.yml。</p>
-<p>butterfly的默认配置就非常棒，如果要个性化配置参考：<a href="https://butterfly.js.org/posts/4aa8abbe/">Butterfly 安裝文檔(三) 主題配置-1 | Butterfly</a><a id="b"></a></p>
-<blockquote>
-<p>导航栏中的页面都需要初始化：执行hexo new page “xxx”，再在source文件中新增的相应文件中进行配置。</p>
-<p>不论page还是post，它们其实都是一个页面，只是由不同模板生成，然后主题中的js在对不同的页面做不同的事，比如文章（post）显示一部分在主页，点开全页显示。标签（tags）显示所有文章中出现的tags。所以tags模板中不能有内容。</p>
-</blockquote>
-<p>写文章的步骤还是<a href=#write>上面</a>和一样。</p>
-<h3 id="交互"><a href="#交互" class="headerlink" title="交互"></a>交互</h3><p>留言和评论需要第三方的方式实现，暂时不考虑。</p>
-<h2 id="部署到GitHub"><a href="#部署到GitHub" class="headerlink" title="部署到GitHub"></a>部署到GitHub</h2><p>Git及GitHub基础操作参考：<a href="https://scazzh.github.io/">Git和GitHub的基本使用</a></p>
-<p>GitHub Page官方说明：<a href="https://pages.github.com/">GitHub Pages | Websites for you and your projects, hosted directly from your GitHub repository. Just edit, push, and your changes are live.</a></p>
-<p>在GitHub新建Repository，勾选Add a README file可以快速初始化一个仓库。必须命名为</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">自定义名称.github.io</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213222112319.png" alt="image-20231213222112319"></p>
-<p>修改项目工程文件中的_config.yml</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">git@github.com:SCAzZH/scazzh.github.io.git</span>		<span class="comment">#我的github仓库地址</span></span><br></pre></td></tr></table></figure>
-
-<p>然后执行</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> hexo clean  <span class="comment">#清除以前的静态文件</span></span><br><span class="line"><span class="variable">$</span> hexo generate  <span class="comment"># hexo g</span></span><br><span class="line"><span class="variable">$</span> hexo deploy	<span class="comment"># hexo d</span></span><br><span class="line"><span class="comment"># 后两步操作可以简写 hexo g -d</span></span><br></pre></td></tr></table></figure>
-
-<p>成功提示如下，项目已经推送到目标仓库的master分支上</p>
-<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213223608595.png" alt="image-20231213223608595"></p>
-<p>点击GitHub仓库界面的Settings，选择左侧栏的Page，选择master&#x2F;(root)，这取决于上传的分支。</p>
-<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213224427303.png" alt="11"></p>
-<p>然后就可以通过之前设置的域名访问了。</p>
-<p>写博客及上传的流程：<a id="c"></a></p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> hexo new post <span class="string">&quot;demo&quot;</span></span><br><span class="line"><span class="comment">## 在_post文件夹中生成的demo.md中用markdown语法编写文章</span></span><br><span class="line"><span class="variable">$</span> hexo clean	<span class="comment">#清除缓存(publish文件夹)</span></span><br><span class="line"><span class="variable">$</span> hexo g <span class="literal">-d</span>    	<span class="comment">#生成静态文件并部署</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>GitHub Page的原理：根据官方说明可知，GitHub Page其实是解析的index.html文件的内容并显示。通过项目仓库的文件目录可以看到hexo为每个文章单独创建了一个文件夹，每个文件夹中都有一个index.html。</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213225606436.png" alt="image-20231213225606436"></p>
-<p>到此，搭建过程结束。</p>
-]]></content>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>Butterfly主题</tag>
-        <tag>GitHub</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Roll A Ball</title>
     <url>/2023/12/12/Roll%20A%20Ball%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<p>Get：—<a href="#a">urp配置文件</a>	—<a href=#b>Material</a>	—<a href=#c>Smoothness</a>	—<a href=#d>Input System</a>	—<a href=#e>Rigidbody（刚体）</a>	—<a href=#f>OnMove(InputValue input)</a>	—<a href=#g>碰撞体(Collider)</a>	—<a href=#h>层级管理</a>	—<a href=#i>OnTriggerEnter(Collider other)</a>	—<a href=#j>Tag</a>	—<a href=#k>CompareTag</a>	—<a href=#l>Prefab(预制体)</a>	—<a href=#m>UI</a>	—<a href=#n>Text-TextMeshPro</a>	—<a href=#o>Rect Transform</a>	—<a href=#p>pivot</a></p>
@@ -308,6 +158,156 @@
         <tag>Unity3D基础</tag>
         <tag>简单小游戏</tag>
         <tag>教程学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo博客搭建流程</title>
+    <url>/2023/12/11/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/</url>
+    <content><![CDATA[<p>此文章用于记录本博客搭建过程及一些心得体会，本博客的搭建采用以下对象：</p>
+<ul>
+<li><p>Hexo：使用Hexo框架快速构建博客。</p>
+</li>
+<li><p>Butterfly：采用Butterfly主题。（备选Next、Keep）</p>
+</li>
+<li><p>GitHub：目标是构建一个静态博客，所以采用GitHub Page来部署，图床也使用Github。</p>
+</li>
+</ul>
+<p>Get：—<a href=#a>npm</a>	—<a href=#b>博客导航栏问题</a>	—<a href=#c>Git Page原理</a></p>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备<a id="a"></a></h2><h3 id="安装Node-js和npm"><a href="#安装Node-js和npm" class="headerlink" title="安装Node.js和npm"></a>安装Node.js和npm</h3><p>要搭建静态博客，Hexo是一个不错的框架。在安装Hexo之前，需要下载Node.js，Node.js是一个开源的，跨平台的javascript运行时环境，通俗的说，就是一个js库，要把这个js库放到全局环境中，才能使用相应Node命令。</p>
+<ul>
+<li>Node.js官网：<a href="https://nodejs.org/">https://nodejs.org</a></li>
+</ul>
+<p>安装好后可以在Windows的cmd里敲node -v，安装成功会提示：node的版本号。</p>
+<div class="note info simple"><p>建议使用node最新的LTS版（长期支持版）。</p>
+</div>
+
+<p>安装好Node后，需要安装npm（Node Package Manager），npm是一个包管理器，许多框架都托管在npm服务器上。使用npm，只需要几行命令就可以把开发需要的依赖包，环境等安装部署到本地，非常强大。</p>
+<ul>
+<li>npm中文文档：<a href="https://nodejs.cn/npm/about-npm/">npm 中文文档 (nodejs.cn)</a></li>
+</ul>
+<p>在访问一个框架的安装文档时，一般都会有类似以下的代码</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> npm install hexo<span class="literal">-cli</span> <span class="literal">-g</span></span><br></pre></td></tr></table></figure>
+
+<p>这是npm的一个命令，意思是node package manager install hexo-cli -global，node包管理器全局安装hexo-cli，hexo-cli是hexo官网提供的hexo环境。只需要一个命令就可以将hexo环境安装到全局。</p>
+<p>输入命令回车后几秒钟就执行完成了，对于萌新来说可能不知道发生了什么。使用以下命令可以查看npm的全局安装路径</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> npm root <span class="literal">-g</span></span><br></pre></td></tr></table></figure>
+
+<p>比如我的路径</p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213163642745.png" alt="image-20231213163642745"></p>
+<p>根据安装路径查看文件夹可以发现：</p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213163700336.png" alt="image-20231213163700336"></p>
+<p>刚刚安装好的hexo-cli文件夹存放在这里。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="Hexo初始化"><a href="#Hexo初始化" class="headerlink" title="Hexo初始化"></a>Hexo初始化</h3><div class="note info simple"><p>现在已经有了全局Hexo环境，可以使用Hexo命令了。</p>
+</div>
+
+<p>可以在任意文件夹构建博客。比如我在桌面创建一个文件夹，打开它然后在此位置打开cmd，点击导航框，在文件夹目录前加cmd，然后运行</p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213165208104.png" alt="image-20231213165208104"></p>
+<p>在cmd中输入</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> hexo init blog   </span><br></pre></td></tr></table></figure>
+
+<div class="note info simple"><p>这个blog是博客工程目录的名称，可以更改</p>
+</div>
+
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> <span class="built_in">cd</span> blog	<span class="comment">#意思是进入blog这个文件，如果改过名，则用之前自定义的名称</span></span><br><span class="line"><span class="variable">$</span> npm install  <span class="comment">#npm安装hexo所需的相关文件，命令执行后自动安装 </span></span><br><span class="line"><span class="variable">$</span> hexo server  <span class="comment">#启动hexo，默认地址http://localhost:4000</span></span><br></pre></td></tr></table></figure>
+
+<p>命令执行完后，成功提示如下:</p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213172707285.png" alt="image-20231213172707285"></p>
+<p>访问<a href="http://localhost:4000，本地博客已经部署完成。">http://localhost:4000，本地博客已经部署完成。</a></p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><div class="note info simple"><p>从此处起以hexo默认主题landscape为准。</p>
+</div>
+
+<h3 id="写博客"><a href="#写博客" class="headerlink" title="写博客"></a>写博客<a id="write"></a></h3><p>在blog文件夹下的cmd中输入</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> hexo new post <span class="string">&quot;文章名&quot;</span>   <span class="comment">#输入要写的文章名</span></span><br><span class="line"><span class="comment"># 比如：hexo new post &quot;Test&quot;  执行后会在source/_post文件夹中生成Test.md文件</span></span><br></pre></td></tr></table></figure>
+
+<div class="note info simple"><p>md后缀文件是Markdown文本文件，Markdown是一种以符号结构规则定义格式的文本语法，很容易上手。推荐使用Typora（付费）来写博客。</p>
+</div>
+
+<ul>
+<li><p>MarkDown基本语法：<a href="https://markdown.com.cn/basic-syntax/">Markdown 基本语法 | Markdown 官方教程</a></p>
+</li>
+<li><p>Typora：<a href="https://typoraio.cn/">Typora 官方中文站 (typoraio.cn)</a></p>
+</li>
+</ul>
+<p>打开Test.md就可以写博客了。在post文件夹下的文章会直接显示在博客上，无论写完与否。</p>
+<p>也可以新建草稿页draft</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> hexo new draft <span class="string">&quot;name&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>写好后，发布</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> hexo publish draft <span class="string">&quot;name&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>后续写博客都是这样的流程。</p>
+<h3 id="添加新页面（如Tags，Categories）"><a href="#添加新页面（如Tags，Categories）" class="headerlink" title="添加新页面（如Tags，Categories）"></a>添加新页面（如Tags，Categories）</h3><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> hexo new page <span class="string">&quot;页面名称&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>如执行<code>hexo new page "test"</code>后运行，在网址栏中访问<a href="http://localhost:4000/test%E5%8F%AF%E4%BB%A5%E8%AE%BF%E9%97%AEtest%E9%A1%B5%E9%9D%A2">http://localhost:4000/test可以访问test页面</a></p>
+<blockquote>
+<p>以上操作post、draft、page依据source&#x2F;scaffolds中对应的模板文件生成页面。</p>
+<p>其实它们都是一个页面，只是由不同模板生成。</p>
+</blockquote>
+<p>模板文件中的头部被称为Font-matter:</p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213195443473.png" alt="image-20231213195443473"></p>
+<p>参数项说明：<a href="https://hexo.io/zh-cn/docs/front-matter">Front-matter | Hexo</a></p>
+<h3 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h3><p>大部分人都想要功能全面且简洁美观的博客，我也是如此。Hexo提供的默认主题landscape相对来说比较简约，功能也比较基础。Hexo的官网上有很多主题。经过筛选，我比较喜欢的主题有：</p>
+<ul>
+<li><p>Butterfly（美观，多彩，文档也非常棒）：<a href="https://butterfly.js.org/">Butterfly - A Simple and Card UI Design theme for Hexo</a></p>
+</li>
+<li><p>Next（简洁，清晰）：<a href="https://theme-next.js.org/">theme-next.js.org</a></p>
+</li>
+<li><p>Keep（简洁，美观）：<a href="https://v3.keep-docs.xpoet.cn/">Keep 主题使用手册 | Hexo 主题 Keep 官方文档 (xpoet.cn)</a></p>
+</li>
+</ul>
+<p>我的博客选择的是Butterfly主题，因为它太优秀了。</p>
+<div class="note info simple"><p>从此处起以Bufferfly主题为准。安装和配置只写主要过程，具体参考<a href="https://butterfly.js.org/posts/21cfbf15/">Butterfly 安裝文檔(一) 快速開始 | Butterfly</a>。</p>
+</div>
+
+
+
+<h3 id="安装-配置"><a href="#安装-配置" class="headerlink" title="安装&amp;配置"></a>安装&amp;配置</h3><p>npm安装：</p>
+<blockquote>
+<p>通过 npm 安装并不会在 themes 里生成主题文件夹，而是在 node_modules 里生成</p>
+</blockquote>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> npm install hexo<span class="literal">-theme-butterfly</span>		<span class="comment">#安装</span></span><br><span class="line"><span class="comment">## 更新 npm update hexo-theme-butterfly</span></span><br></pre></td></tr></table></figure>
+
+<p>将工程目录主页下的_config.yml中的主题改为: butterfly</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">butterfly</span>	<span class="comment">#在_config.yml中按ctrl+f搜索theme，快速定位</span></span><br></pre></td></tr></table></figure>
+
+<p>在工程目录主页新建bufferfly主题配置文件_config.butterfly.yml，找到node_modules&#x2F;hexo-theme-butterfly&#x2F;_config.yml将内容复制到_config.butterfly.yml。</p>
+<p>butterfly的默认配置就非常棒，如果要个性化配置参考：<a href="https://butterfly.js.org/posts/4aa8abbe/">Butterfly 安裝文檔(三) 主題配置-1 | Butterfly</a><a id="b"></a></p>
+<blockquote>
+<p>导航栏中的页面都需要初始化：执行hexo new page “xxx”，再在source文件中新增的相应文件中进行配置。</p>
+<p>不论page还是post，它们其实都是一个页面，只是由不同模板生成，然后主题中的js在对不同的页面做不同的事，比如文章（post）显示一部分在主页，点开全页显示。标签（tags）显示所有文章中出现的tags。所以tags模板中不能有内容。</p>
+</blockquote>
+<p>写文章的步骤还是<a href=#write>上面</a>和一样。</p>
+<h3 id="交互"><a href="#交互" class="headerlink" title="交互"></a>交互</h3><p>留言和评论需要第三方的方式实现，暂时不考虑。</p>
+<h2 id="部署到GitHub"><a href="#部署到GitHub" class="headerlink" title="部署到GitHub"></a>部署到GitHub</h2><p>Git及GitHub基础操作参考：<a href="https://scazzh.github.io/">Git和GitHub的基本使用</a></p>
+<p>GitHub Page官方说明：<a href="https://pages.github.com/">GitHub Pages | Websites for you and your projects, hosted directly from your GitHub repository. Just edit, push, and your changes are live.</a></p>
+<p>在GitHub新建Repository，勾选Add a README file可以快速初始化一个仓库。必须命名为</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">自定义名称.github.io</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213222112319.png" alt="image-20231213222112319"></p>
+<p>修改项目工程文件中的_config.yml</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">git@github.com:SCAzZH/scazzh.github.io.git</span>		<span class="comment">#我的github仓库地址</span></span><br></pre></td></tr></table></figure>
+
+<p>然后执行</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> hexo clean  <span class="comment">#清除以前的静态文件</span></span><br><span class="line"><span class="variable">$</span> hexo generate  <span class="comment"># hexo g</span></span><br><span class="line"><span class="variable">$</span> hexo deploy	<span class="comment"># hexo d</span></span><br><span class="line"><span class="comment"># 后两步操作可以简写 hexo g -d</span></span><br></pre></td></tr></table></figure>
+
+<p>成功提示如下，项目已经推送到目标仓库的master分支上</p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213223608595.png" alt="image-20231213223608595"></p>
+<p>点击GitHub仓库界面的Settings，选择左侧栏的Page，选择master&#x2F;(root)，这取决于上传的分支。</p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213224427303.png" alt="11"></p>
+<p>然后就可以通过之前设置的域名访问了。</p>
+<p>写博客及上传的流程：<a id="c"></a></p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> hexo new post <span class="string">&quot;demo&quot;</span></span><br><span class="line"><span class="comment">## 在_post文件夹中生成的demo.md中用markdown语法编写文章</span></span><br><span class="line"><span class="variable">$</span> hexo clean	<span class="comment">#清除缓存(publish文件夹)</span></span><br><span class="line"><span class="variable">$</span> hexo g <span class="literal">-d</span>    	<span class="comment">#生成静态文件并部署</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>GitHub Page的原理：根据官方说明可知，GitHub Page其实是解析的index.html文件的内容并显示。通过项目仓库的文件目录可以看到hexo为每个文章单独创建了一个文件夹，每个文件夹中都有一个index.html。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213225606436.png" alt="image-20231213225606436"></p>
+<p>到此，搭建过程结束。</p>
+]]></content>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>Butterfly主题</tag>
+        <tag>GitHub</tag>
       </tags>
   </entry>
   <entry>

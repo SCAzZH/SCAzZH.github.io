@@ -1,31 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>启</title>
-    <url>/2023/12/12/%E5%90%AF/</url>
-    <content><![CDATA[<blockquote>
-<p>业精于勤，荒于嬉；行成于思，毁于随。						——【唐】韩愈《进学解》</p>
-</blockquote>
-<blockquote>
-<p>不积跬步，无以至千里；不积小流，无以成江海。		——【战国】荀子《劝学》</p>
-</blockquote>
-<p>要说为什么想写博客，其主要的原因是自己总是学多积少，又很懒，但是野心很大，什么都想学，但是总是不积累，不积累就不容易反思，不容易反思就导致自己总是在门外徘徊，刚进门尝到了甜头就开始原地享受，最终发现自己学什么都是半吊子。</p>
-<p>以前认为写博客是很浪费时间的行为，写的东西也大多是知识点，相当于把百度百科移植了一般，就算自己写了文章也很少会回头看，越写越没有动力，味同嚼蜡。这种循环怎么能让人坚持下去呢。</p>
-<p>直到自己真正做完一个项目，用心的写完自己一步步实践的过程和过程中遇到的问题的解决方法与反思，一看时间已是凌晨2点多，但是奇怪的是自己并不累，而且感觉到十分满足的时候，我才明白什么是高级的快乐。</p>
-<blockquote>
-<p>学而不思则罔，思而不学则殆。									——【春秋】《论语·为政》</p>
-</blockquote>
-<p>圣人不愧是圣人，只有自己亲身体会，才能感悟话中的含义。</p>
-]]></content>
-      <categories>
-        <category>感悟</category>
-      </categories>
-      <tags>
-        <tag>杂谈</tag>
-        <tag>非技术</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Roll A Ball</title>
     <url>/2023/12/12/Roll%20A%20Ball%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<p>Get：<a href="#p">urp配置文件	Material</a>	Smoothness	Input System	Rigidbody（刚体）	OnMove(InputValue input)	碰撞体(Collider)	层级管理	OnTriggerEnter(Collider other)	Tag	CompareTag	Prefab(预制体)	UI	Text-TextMeshPro	Rect Transform	pivot</p>
@@ -173,6 +148,31 @@
         <tag>Unity3D基础</tag>
         <tag>简单小游戏</tag>
         <tag>教程学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>启</title>
+    <url>/2023/12/12/%E5%90%AF/</url>
+    <content><![CDATA[<blockquote>
+<p>业精于勤，荒于嬉；行成于思，毁于随。						——【唐】韩愈《进学解》</p>
+</blockquote>
+<blockquote>
+<p>不积跬步，无以至千里；不积小流，无以成江海。		——【战国】荀子《劝学》</p>
+</blockquote>
+<p>要说为什么想写博客，其主要的原因是自己总是学多积少，又很懒，但是野心很大，什么都想学，但是总是不积累，不积累就不容易反思，不容易反思就导致自己总是在门外徘徊，刚进门尝到了甜头就开始原地享受，最终发现自己学什么都是半吊子。</p>
+<p>以前认为写博客是很浪费时间的行为，写的东西也大多是知识点，相当于把百度百科移植了一般，就算自己写了文章也很少会回头看，越写越没有动力，味同嚼蜡。这种循环怎么能让人坚持下去呢。</p>
+<p>直到自己真正做完一个项目，用心的写完自己一步步实践的过程和过程中遇到的问题的解决方法与反思，一看时间已是凌晨2点多，但是奇怪的是自己并不累，而且感觉到十分满足的时候，我才明白什么是高级的快乐。</p>
+<blockquote>
+<p>学而不思则罔，思而不学则殆。									——【春秋】《论语·为政》</p>
+</blockquote>
+<p>圣人不愧是圣人，只有自己亲身体会，才能感悟话中的含义。</p>
+]]></content>
+      <categories>
+        <category>感悟</category>
+      </categories>
+      <tags>
+        <tag>杂谈</tag>
+        <tag>非技术</tag>
       </tags>
   </entry>
 </search>

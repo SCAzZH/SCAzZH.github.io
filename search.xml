@@ -11,156 +11,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Roll A Ball</title>
-    <url>/2023/12/12/Roll%20A%20Ball%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<p>Get：—<a href="#a">urp配置文件</a>	—<a href=#b>Material</a>	—<a href=#c>Smoothness</a>	—<a href=#d>Input System</a>	—<a href=#e>Rigidbody（刚体）</a>	—<a href=#f>OnMove(InputValue input)</a>	—<a href=#g>碰撞体(Collider)</a>	—<a href=#h>层级管理</a>	—<a href=#i>OnTriggerEnter(Collider other)</a>	—<a href=#j>Tag</a>	—<a href=#k>CompareTag</a>	—<a href=#l>Prefab(预制体)</a>	—<a href=#m>UI</a>	—<a href=#n>Text-TextMeshPro</a>	—<a href=#o>Rect Transform</a>	—<a href=#p>pivot</a></p>
-<blockquote>
-<p>游戏简介</p>
-</blockquote>
-<p>Roll A Ball是一款简单的3D小游戏，玩家通过控制小球运动迟到所有的可拾取的方块后获胜。</p>
-<blockquote>
-<p>游戏场景示例</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213141914491.png" alt="image-20231213141914491"></p>
-<blockquote>
-<p>游戏设计思路</p>
-</blockquote>
-<ol>
-<li><p>新建项目（选择URP 3D项目模板），将模板和Sence单独存放在一个Template文件夹，相当于将模板Sence另存位。</p>
-</li>
-<li><p>新建一个Sence，新Sence包含Main Camera和Directional Light。</p>
-</li>
-<li><p>游戏的场景搭建，游戏是在一个小平台上运行，首先需要一个平台，在平台上新建一个球体，基本场景搭建完成。</p>
-</li>
-<li><p>让玩家能够操作小球移动。</p>
-</li>
-<li><p>摄像机跟随。</p>
-</li>
-<li><p>平台场景优化，设置边界围墙。</p>
-</li>
-<li><p>设置可拾取物，为游戏增加乐趣。</p>
-</li>
-<li><p>创建UI，在游戏游玩中为玩家提供信息。</p>
-</li>
-<li><p>游戏玩法完善，输赢规则。</p>
-</li>
-<li><p>游戏打包设置，游戏窗口大小等。</p>
-</li>
-</ol>
-<blockquote>
-<p>详细设计（基于Unity版本：2021.3.23f1c1 TLS   |  Unity Hub版本： 3.3.1-c1）</p>
-</blockquote>
-<p><strong>创建项目</strong></p>
-<p>选择 3D Sample Scene(URP) 模板</p>
-<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213141950028.png" alt="image-20231213141950028"></p>
-<p>其他设置</p>
-<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142027653.png" alt="image-20231213142027653"></p>
-<p>经过一万年后，创建好的项目模板如下</p>
-<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142102314.png" alt="image-20231213142102314"><br>这是一个示例Sence，用来展示URP的效果，将模板中所有文件存放到一个新建的Template文件夹，暂时不能删掉，因为里面有<strong id="a">urp配置文件</strong>，如果删掉urp渲染将加载不出来。</p>
-<p>将示例Sence保存，然后新建一个Sence，新建一个Sence文件夹，将Sence保存在文件夹里。</p>
-<p>我这里将示例文件里的urp配置提取了出来，然后保存在Setting文件夹中。</p>
-<p>现在Sence界面还是一片空白。根据游戏设计思路，要先创建一个基本的游戏平台和游戏角色。</p>
-<blockquote>
-<p>一个物体的坐标是是物体中心的坐标</p>
-</blockquote>
-<p>新建一个Plane作为游戏的平台，命名为Ground，重置transform，将Scale改为（2,1,2），Plane的大小是10*10个网格。</p>
-<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142125371.png" alt="image-20231213142125371"></p>
-<p>将新建一个Materials文件夹，Material是有游戏中的材质，如游戏角色的颜色，贴图等。在Material文件夹中新建一个<strong id="b">Material</strong>，命名为Ground，将它拖拽到Hierarchy中的Ground这个GameObject上，这个Material将作为Ground的材质Ground进行渲染。设置它的<strong id="c">Smoothness</strong>为0.25，将它的取色器RGB改为（170，170，170），完成后Ground的样式如下</p>
-<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142139848.png" alt="image-20231213142139848"></p>
-<p>平台建立好后，需要创建游戏角色。新建一个Sphere，重命名为Player，将它的Transform重置后看到小球有一半在平台下方，将它的Transform中的Position中的y改为0.5可以看到小球刚好利于平面中间，默认的小球颜色不好看，所以要为它创建一个Material，使这个小球更具个性。随便设置一个颜色，修改Smoothness为0.75使小球看起来更光滑，示例如下</p>
-<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142151172.png" alt="image-20231213142151172"></p>
-<p>现在已经完成了平台和游戏角色的创建，现在要让玩家能够控制小球的移动，此时需要编写脚本，新建一个Scripts文件夹，将所有的脚本文件都存放在Scripts文件夹中，新建一个C# script文件，命名为PlayerController，也可以直接在Player的inspector窗口的最下方Add Component中新建Script，这样新建的script将直接挂载到Player上，在文件夹中创建的script可以通过拖拽的方式将script挂载到GameObject上。</p>
-<p>在编写脚本之前，在Windows -&gt; Package Manage中安装一个<strong id="d">Input System</strong>，这使Unity官方的一个插件，用于获取输入并于游戏行为进行交互。</p>
-<p>在Player的Inspector窗口中添加一个Player Input组件</p>
-<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142207514.png" alt="image-20231213142207514"></p>
-<p>点击Create Actions，系统会自动提醒要将文件保存到哪里，新建一个Inputs文件夹用以保存这个文件。其实现在输入wasd已经和游戏关联起来了，只需要取到输入的值，再根据值对Player进行物理作用就可以了，对一个GameObject进行物理作用需要给它添加一个组件<strong id="e">Rigidbody（刚体）</strong>，对一个物体施加力就是对刚体施加力，开始编写代码</p>
-<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="comment">//需要使用InputSystem</span></span><br><span class="line"><span class="keyword">using</span> UnityEngine.InputSystem;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//要获取键盘输入的值，对小球施加力</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">PlayerController</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;    </span><br><span class="line">    <span class="comment">//用于获取刚体,不需要其他组件访问，所以私有</span></span><br><span class="line">    <span class="keyword">private</span> Rigidbody rb;</span><br><span class="line">    <span class="comment">//用于获取键盘输入的向量大小</span></span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">float</span> movemenetX;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">float</span> movementY;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//speed用以设置游戏角色的速度</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> speed = <span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Start is called before the first frame update</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//在游戏开始时获取刚体</span></span><br><span class="line">        rb = GetComponent&lt;Rigidbody&gt;();</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//OnMove是InputSystem提供的一个函数，下方解释</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">OnMove</span>(<span class="params">InputValue input</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//input只能获取Vector2的值，此处的x，y在Unity3D中对应x，z</span></span><br><span class="line">        movementX = input.Get&lt;Vector2&gt;().x;</span><br><span class="line">        movementY = input.Get&lt;Vector2&gt;().y;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//力的作用都用FixedUpdate</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">FixedUpdate</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//对Player的刚体施加力，参数是Vector3，本游戏只在x，z轴运动，所以新建Vector3将y的力设为0</span></span><br><span class="line">        rb.AddForce(<span class="keyword">new</span> 				Vector3(movementX,<span class="number">0</span>,movemenetY)*speed);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><strong id="f">OnMove(InputValue input)</strong>的来源</p>
-<p>打开Inputs文件夹</p>
-<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142226660.png" alt="image-20231213142226660"></p>
-<p>打开这个Roll A Ball</p>
-<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142258491.png" alt="image-20231213142258491"></p>
-<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142242440.png" alt="image-20231213142242440"></p>
-<p>发现Actions有三种Move、Look、Fire，Move下方有WASD，在按下WASD时，会调用OnMove(InputValue input)方法，它会传入一个InputValue类型的参数，InputValue类有一个Get泛型方法，可以返回Vector2类型的值，这个值就是玩家键盘的输入，w、s对应x，a、d对应y。获取到这个值，再通过这个值对Player刚体施加力，就能实现键盘控制小球移动。</p>
-<p>将代码挂载好后，玩家就可以对小球进行控制。</p>
-<p>游戏的基本骨架已经完成了，接下来是丰富游戏内容，优化游戏体验，建立游戏玩法。</p>
-<p>设置平台边界，让小球不能掉出平台。新建一个cube，一个cube的边长是一个网格大小，设置它的Scale为（0.5，2，20.5）,Position值为（0，0，10），给它命名为West Wall，以此类推…</p>
-<blockquote>
-<p>Cube和Sphere自带<strong id="g">碰撞体(Collider)</strong>，所以可以跟小球产生碰撞，如果有一者没有碰撞体，那么当两物体相撞时会直接穿过对方。</p>
-</blockquote>
-<p>为Wall建立一个Material。</p>
-<p>四面Wall创建好后可以用一个Create Empty创建一个空Object，然后命名为Walls用来作为四个Wall的父容器，方便管理，只需要全选Wall然后将它们拖拽到Walls处。</p>
-<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142313351.png" alt="image-20231213142313351"></p>
-<p>如果是大型项目的话会有很多gameObject，Hierarchy窗口会很乱，所以要养成这种<strong id="h">层级管理</strong>的意识。</p>
-<p>接下来，让摄像机跟随Player移动，使游戏体验效果更好。为摄像机附加一个Script，需要达到的效果是：小球移动时，游戏界面跟随小球的移动而移动。</p>
-<p>这个脚本需要获取相机相对于小球位置的向量，动态获取小球移动后的位置，用小球的移动后的位置加小球相距相机的位置。</p>
-<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CameraController</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//主要用于获取小球位置</span></span><br><span class="line">    <span class="keyword">public</span> GameObject ball;</span><br><span class="line">    <span class="comment">//差距向量</span></span><br><span class="line">    Vector3 offset = <span class="keyword">new</span> Vector3();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Start is called before the first frame update</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//用相机初始位置-小球初始位置</span></span><br><span class="line">        offset =  <span class="keyword">this</span>.transform.position - ball.transform.position;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//相机跟随用LateUpdate，在所有Update调用完后调用</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">LateUpdate</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//相机跟随位置 = 小球位置+差距向量</span></span><br><span class="line">        tranform.position = offset + ball.transform.position;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//相机跟随效果完成</span></span><br></pre></td></tr></table></figure>
-
-<p>现在有了游戏角色，有了游戏场景，还有相机跟随效果，但游戏很单调，没有什么玩法。</p>
-<p>在场景中添加一些可拾取物，增加游戏玩法：用小球拾取物品。</p>
-<p>创建Cube，重命名为PickUp，添加Material，设置Scale为（0.5，0.5，0.5），这样会使得PickUp看起来更小巧，更精致。再给PickUp添加一个旋转效果，使游戏更生动。</p>
-<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Rotator</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Update is called once per frame</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//使PickUp转起来</span></span><br><span class="line">        transform.Rotate(<span class="keyword">new</span> Vector3(<span class="number">15</span>,<span class="number">30</span>,<span class="number">45</span>)*Time.deltaTime);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>将代码挂载到PickUp上，运行游戏，就有旋转的效果了。</p>
-<p>现在小球只能跟PickUp碰撞，但产生不了任何作用，将PickUp的Box Collider组件中的is Trigger勾选，在运行游戏可以发现小球能够直接穿过PickUp，is Trigger选项意思是碰撞体是否作为触发器使用。当PickUp作为一个触发器使用时，如果小球进入了PickUp，小球就会调用一个方法<strong id="i">OnTriggerEnter(Collider other)</strong>，这个方法会将PickUp的Collider作为参数other传进来，可以用other做一些事，比如消灭这个PickUp。</p>
-<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="comment">//在PlayerController中添加方法OnTriggerEnter(Collider other)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">OnTriggerEnter</span>(<span class="params">Collider other</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    other.gameObject.SetActive(<span class="literal">false</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>更新游戏，发现小球碰到PickUp时会将PickUp消灭。</p>
-<p>但是，这里有一个问题，如果有多个Trigger，每个Trigger有不同的作用，如果代码写成上面那样，小球进入任何Trigger都会将它消灭，而不是让Trigger产生预期的作用。那么，需要让小球知道，只有进入PickUp这个Trigger时才将它消灭。</p>
-<p>可以通过  <strong id="j">Tag</strong>   对PickUp的Trigger进行标记。</p>
-<p>先添加PickUp标签，再选中PickUp</p>
-<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142326809.png" alt="image-20231213142326809"></p>
-<p>修改PlayerController，使用<strong id="k">CompareTag</strong>方法</p>
-<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">OnTriggerEnter</span>(<span class="params">Collider other</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//如果Tag等于PickUp，则消除它</span></span><br><span class="line">    <span class="keyword">if</span>(other.gameObject.CompareTag(<span class="string">&quot;PickUp&quot;</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        other.gameObject.setActive(<span class="string">&quot;false&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>游戏中往往有很多个PickUp，所以要将PickUp这个GameObject重复利用。将PickUp制成<strong id="l">Prefab(预制体)</strong> ，创建一个Prefabs文件夹，只需要将PickUp从Hierarchy窗口拖拽到Prefabs文件夹即可，此时PickUp将变成蓝色。</p>
-<p>在游戏场景内创建多个PickUp可以选中PickUp然后Crtl+D复制再拖动，也可以打开Prefabs文件夹将预制体往Scene界面拖拽。</p>
-<p>要保持规整性，可以点击Scene视图右上角的y切换到俯视图模式</p>
-<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142337068.png" alt="image-20231213142337068"></p>
-<p>俯视图模式下拖拽物体不会对y轴产生影响，所以可以很方便的放置预制体</p>
-<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142345823.png" alt="image-20231213142345823"></p>
-<p>最后将所有PickUp用一个空GameObject归纳起来。</p>
-<p>现在游戏已经基本成型了，但还是缺点乐趣，玩家不能直观地看出自己已经收集了多少个PickUp，就算收集了所有PickUp，也没有什么成就感。</p>
-<p>现在需要游戏本身与玩家进行交互，所以需要有<strong id="m">UI</strong>（User Interface），系统和用户交互的界面。</p>
-<p>首先需要一个计数栏，对玩家收集的PickUp进行记录。选择Unity UI中的<strong id="n">Text-TextMeshPro</strong>来制作。</p>
-<p>在Hierarchy窗口中右键 -&gt; UI -&gt; Text-TextMeshPro，修改它的名字为Count，将文本修改如下</p>
-<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213211206744.png" alt="image-20231213211206744"></p>
-<p>将收集信息Count放在游戏界面左上角是个不错的想法，选中Count，点击<strong id="o">Rect Transform</strong>下方的双矩形图标，可以快速修改<strong id="p">pivot</strong>和position，</p>
-<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213211222631.png" alt="image-20231213211222631"></p>
-<p>按住shift和alt再点击左上角的矩形，这时锚点和文体框的位置都会移到游戏界面左上方，再对位置进行微调，让他处在完美的位置。Rect Transform中的Pos X和Pox Y都是相对于锚点的位置。</p>
-<p>如果文本比较长，要对文本框的宽度和高度进行设置，避免溢出导致变形。</p>
-<p>文本框已经加到游戏界面中了，现在需要在游戏角色收集PickUp时更新Count的输出。</p>
-<p>在PlayerController中添加代码，完善后的代码为</p>
-<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ++表示新加入的代码</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">PlayerController</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> speed = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">private</span> Rigidbody rb;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">float</span> movementX;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">float</span> movementY;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">int</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ++  用以存放</span></span><br><span class="line">    <span class="keyword">public</span> TMP_Text countNum;</span><br><span class="line">    <span class="comment">// Start is called before the first frame update</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        rb = GetComponent&lt;Rigidbody&gt;();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">OnMove</span>(<span class="params">InputValue input</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        movementX = input.Get&lt;Vector2&gt;().x;</span><br><span class="line">        movementY= input.Get&lt;Vector2&gt;().y;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//++ Update刷新count显示内容，手机玩所有小球显示胜利</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        countNum.text = <span class="string">&quot;Count :&quot;</span> + count.ToString();</span><br><span class="line">        <span class="keyword">if</span> (count == <span class="number">13</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            countNum.text = <span class="string">&quot;YOU WIN !!! CONGRATULATIONS!!!&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Update is called once per frame</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">FixedUpdate</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        rb.AddForce(<span class="keyword">new</span> Vector3(movementX,<span class="number">0</span>,movementY)*speed);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">OnTriggerEnter</span>(<span class="params">Collider other</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (other.gameObject.CompareTag(<span class="string">&quot;PickUp&quot;</span>))</span><br><span class="line">        &#123;</span><br><span class="line">            other.gameObject.SetActive(<span class="literal">false</span>);</span><br><span class="line">            count++;</span><br><span class="line">        &#125;      </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>到这里，Roll A Ball 整个游戏的开发流程就结束了。</p>
-<p>因为游戏比较简单，所以简单测试功能正常就OK了。</p>
-<p>接下来是打包。</p>
-<p>游戏比较小，所以窗口化游玩是个不错的选择。</p>
-<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142406093.png" alt="image-20231213142406093"></p>
-<p>点击左下角的Player Settings，设置窗口化</p>
-<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142418377.png" alt="image-20231213142418377"></p>
-<p>OK，退出点击Build。</p>
-<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142440321.png" alt="image-20231213142440321"></p>
-<p>试玩游戏</p>
-<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142459627.png" alt="image-20231213142459627"></p>
-<p>通关了自己的游戏，Amzing！！！</p>
-<p>总结：</p>
-<p>获得自己亲手完成的游戏作品无疑是对自己最大的鼓励。在制作的流程中还有许多不理解的地方，比如一些组件的使用，一些组件里的属性的作用等。长路漫漫，漫漫长路，都是收获之路。</p>
-<p>参考：</p>
-<p>[Unity官方教程Roll A Ball](<a href="https://space.bilibili.com/386224375/search/video?keyword=roll">Unity官方的个人空间-Unity官方个人主页-哔哩哔哩视频 (bilibili.com)</a>)</p>
-]]></content>
-      <categories>
-        <category>Unity3D</category>
-      </categories>
-      <tags>
-        <tag>Unity3D基础</tag>
-        <tag>简单小游戏</tag>
-        <tag>教程学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo博客搭建流程</title>
     <url>/2023/12/11/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/</url>
     <content><![CDATA[<p>此文章用于记录本博客搭建过程及一些心得体会，本博客的搭建采用以下对象：</p>
@@ -308,6 +158,156 @@
         <tag>Hexo</tag>
         <tag>Butterfly主题</tag>
         <tag>GitHub</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Roll A Ball</title>
+    <url>/2023/12/12/Roll%20A%20Ball%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<p>Get：—<a href="#a">urp配置文件</a>	—<a href=#b>Material</a>	—<a href=#c>Smoothness</a>	—<a href=#d>Input System</a>	—<a href=#e>Rigidbody（刚体）</a>	—<a href=#f>OnMove(InputValue input)</a>	—<a href=#g>碰撞体(Collider)</a>	—<a href=#h>层级管理</a>	—<a href=#i>OnTriggerEnter(Collider other)</a>	—<a href=#j>Tag</a>	—<a href=#k>CompareTag</a>	—<a href=#l>Prefab(预制体)</a>	—<a href=#m>UI</a>	—<a href=#n>Text-TextMeshPro</a>	—<a href=#o>Rect Transform</a>	—<a href=#p>pivot</a></p>
+<blockquote>
+<p>游戏简介</p>
+</blockquote>
+<p>Roll A Ball是一款简单的3D小游戏，玩家通过控制小球运动迟到所有的可拾取的方块后获胜。</p>
+<blockquote>
+<p>游戏场景示例</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213141914491.png" alt="image-20231213141914491"></p>
+<blockquote>
+<p>游戏设计思路</p>
+</blockquote>
+<ol>
+<li><p>新建项目（选择URP 3D项目模板），将模板和Sence单独存放在一个Template文件夹，相当于将模板Sence另存位。</p>
+</li>
+<li><p>新建一个Sence，新Sence包含Main Camera和Directional Light。</p>
+</li>
+<li><p>游戏的场景搭建，游戏是在一个小平台上运行，首先需要一个平台，在平台上新建一个球体，基本场景搭建完成。</p>
+</li>
+<li><p>让玩家能够操作小球移动。</p>
+</li>
+<li><p>摄像机跟随。</p>
+</li>
+<li><p>平台场景优化，设置边界围墙。</p>
+</li>
+<li><p>设置可拾取物，为游戏增加乐趣。</p>
+</li>
+<li><p>创建UI，在游戏游玩中为玩家提供信息。</p>
+</li>
+<li><p>游戏玩法完善，输赢规则。</p>
+</li>
+<li><p>游戏打包设置，游戏窗口大小等。</p>
+</li>
+</ol>
+<blockquote>
+<p>详细设计（基于Unity版本：2021.3.23f1c1 TLS   |  Unity Hub版本： 3.3.1-c1）</p>
+</blockquote>
+<p><strong>创建项目</strong></p>
+<p>选择 3D Sample Scene(URP) 模板</p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213141950028.png" alt="image-20231213141950028"></p>
+<p>其他设置</p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142027653.png" alt="image-20231213142027653"></p>
+<p>经过一万年后，创建好的项目模板如下</p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142102314.png" alt="image-20231213142102314"><br>这是一个示例Sence，用来展示URP的效果，将模板中所有文件存放到一个新建的Template文件夹，暂时不能删掉，因为里面有<strong id="a">urp配置文件</strong>，如果删掉urp渲染将加载不出来。</p>
+<p>将示例Sence保存，然后新建一个Sence，新建一个Sence文件夹，将Sence保存在文件夹里。</p>
+<p>我这里将示例文件里的urp配置提取了出来，然后保存在Setting文件夹中。</p>
+<p>现在Sence界面还是一片空白。根据游戏设计思路，要先创建一个基本的游戏平台和游戏角色。</p>
+<blockquote>
+<p>一个物体的坐标是是物体中心的坐标</p>
+</blockquote>
+<p>新建一个Plane作为游戏的平台，命名为Ground，重置transform，将Scale改为（2,1,2），Plane的大小是10*10个网格。</p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142125371.png" alt="image-20231213142125371"></p>
+<p>将新建一个Materials文件夹，Material是有游戏中的材质，如游戏角色的颜色，贴图等。在Material文件夹中新建一个<strong id="b">Material</strong>，命名为Ground，将它拖拽到Hierarchy中的Ground这个GameObject上，这个Material将作为Ground的材质Ground进行渲染。设置它的<strong id="c">Smoothness</strong>为0.25，将它的取色器RGB改为（170，170，170），完成后Ground的样式如下</p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142139848.png" alt="image-20231213142139848"></p>
+<p>平台建立好后，需要创建游戏角色。新建一个Sphere，重命名为Player，将它的Transform重置后看到小球有一半在平台下方，将它的Transform中的Position中的y改为0.5可以看到小球刚好利于平面中间，默认的小球颜色不好看，所以要为它创建一个Material，使这个小球更具个性。随便设置一个颜色，修改Smoothness为0.75使小球看起来更光滑，示例如下</p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142151172.png" alt="image-20231213142151172"></p>
+<p>现在已经完成了平台和游戏角色的创建，现在要让玩家能够控制小球的移动，此时需要编写脚本，新建一个Scripts文件夹，将所有的脚本文件都存放在Scripts文件夹中，新建一个C# script文件，命名为PlayerController，也可以直接在Player的inspector窗口的最下方Add Component中新建Script，这样新建的script将直接挂载到Player上，在文件夹中创建的script可以通过拖拽的方式将script挂载到GameObject上。</p>
+<p>在编写脚本之前，在Windows -&gt; Package Manage中安装一个<strong id="d">Input System</strong>，这使Unity官方的一个插件，用于获取输入并于游戏行为进行交互。</p>
+<p>在Player的Inspector窗口中添加一个Player Input组件</p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142207514.png" alt="image-20231213142207514"></p>
+<p>点击Create Actions，系统会自动提醒要将文件保存到哪里，新建一个Inputs文件夹用以保存这个文件。其实现在输入wasd已经和游戏关联起来了，只需要取到输入的值，再根据值对Player进行物理作用就可以了，对一个GameObject进行物理作用需要给它添加一个组件<strong id="e">Rigidbody（刚体）</strong>，对一个物体施加力就是对刚体施加力，开始编写代码</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="comment">//需要使用InputSystem</span></span><br><span class="line"><span class="keyword">using</span> UnityEngine.InputSystem;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//要获取键盘输入的值，对小球施加力</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">PlayerController</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;    </span><br><span class="line">    <span class="comment">//用于获取刚体,不需要其他组件访问，所以私有</span></span><br><span class="line">    <span class="keyword">private</span> Rigidbody rb;</span><br><span class="line">    <span class="comment">//用于获取键盘输入的向量大小</span></span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">float</span> movemenetX;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">float</span> movementY;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//speed用以设置游戏角色的速度</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> speed = <span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Start is called before the first frame update</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//在游戏开始时获取刚体</span></span><br><span class="line">        rb = GetComponent&lt;Rigidbody&gt;();</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//OnMove是InputSystem提供的一个函数，下方解释</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">OnMove</span>(<span class="params">InputValue input</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//input只能获取Vector2的值，此处的x，y在Unity3D中对应x，z</span></span><br><span class="line">        movementX = input.Get&lt;Vector2&gt;().x;</span><br><span class="line">        movementY = input.Get&lt;Vector2&gt;().y;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//力的作用都用FixedUpdate</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">FixedUpdate</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//对Player的刚体施加力，参数是Vector3，本游戏只在x，z轴运动，所以新建Vector3将y的力设为0</span></span><br><span class="line">        rb.AddForce(<span class="keyword">new</span> 				Vector3(movementX,<span class="number">0</span>,movemenetY)*speed);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong id="f">OnMove(InputValue input)</strong>的来源</p>
+<p>打开Inputs文件夹</p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142226660.png" alt="image-20231213142226660"></p>
+<p>打开这个Roll A Ball</p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142258491.png" alt="image-20231213142258491"></p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142242440.png" alt="image-20231213142242440"></p>
+<p>发现Actions有三种Move、Look、Fire，Move下方有WASD，在按下WASD时，会调用OnMove(InputValue input)方法，它会传入一个InputValue类型的参数，InputValue类有一个Get泛型方法，可以返回Vector2类型的值，这个值就是玩家键盘的输入，w、s对应x，a、d对应y。获取到这个值，再通过这个值对Player刚体施加力，就能实现键盘控制小球移动。</p>
+<p>将代码挂载好后，玩家就可以对小球进行控制。</p>
+<p>游戏的基本骨架已经完成了，接下来是丰富游戏内容，优化游戏体验，建立游戏玩法。</p>
+<p>设置平台边界，让小球不能掉出平台。新建一个cube，一个cube的边长是一个网格大小，设置它的Scale为（0.5，2，20.5）,Position值为（0，0，10），给它命名为West Wall，以此类推…</p>
+<blockquote>
+<p>Cube和Sphere自带<strong id="g">碰撞体(Collider)</strong>，所以可以跟小球产生碰撞，如果有一者没有碰撞体，那么当两物体相撞时会直接穿过对方。</p>
+</blockquote>
+<p>为Wall建立一个Material。</p>
+<p>四面Wall创建好后可以用一个Create Empty创建一个空Object，然后命名为Walls用来作为四个Wall的父容器，方便管理，只需要全选Wall然后将它们拖拽到Walls处。</p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142313351.png" alt="image-20231213142313351"></p>
+<p>如果是大型项目的话会有很多gameObject，Hierarchy窗口会很乱，所以要养成这种<strong id="h">层级管理</strong>的意识。</p>
+<p>接下来，让摄像机跟随Player移动，使游戏体验效果更好。为摄像机附加一个Script，需要达到的效果是：小球移动时，游戏界面跟随小球的移动而移动。</p>
+<p>这个脚本需要获取相机相对于小球位置的向量，动态获取小球移动后的位置，用小球的移动后的位置加小球相距相机的位置。</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CameraController</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//主要用于获取小球位置</span></span><br><span class="line">    <span class="keyword">public</span> GameObject ball;</span><br><span class="line">    <span class="comment">//差距向量</span></span><br><span class="line">    Vector3 offset = <span class="keyword">new</span> Vector3();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Start is called before the first frame update</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//用相机初始位置-小球初始位置</span></span><br><span class="line">        offset =  <span class="keyword">this</span>.transform.position - ball.transform.position;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//相机跟随用LateUpdate，在所有Update调用完后调用</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">LateUpdate</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//相机跟随位置 = 小球位置+差距向量</span></span><br><span class="line">        tranform.position = offset + ball.transform.position;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//相机跟随效果完成</span></span><br></pre></td></tr></table></figure>
+
+<p>现在有了游戏角色，有了游戏场景，还有相机跟随效果，但游戏很单调，没有什么玩法。</p>
+<p>在场景中添加一些可拾取物，增加游戏玩法：用小球拾取物品。</p>
+<p>创建Cube，重命名为PickUp，添加Material，设置Scale为（0.5，0.5，0.5），这样会使得PickUp看起来更小巧，更精致。再给PickUp添加一个旋转效果，使游戏更生动。</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Rotator</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Update is called once per frame</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//使PickUp转起来</span></span><br><span class="line">        transform.Rotate(<span class="keyword">new</span> Vector3(<span class="number">15</span>,<span class="number">30</span>,<span class="number">45</span>)*Time.deltaTime);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将代码挂载到PickUp上，运行游戏，就有旋转的效果了。</p>
+<p>现在小球只能跟PickUp碰撞，但产生不了任何作用，将PickUp的Box Collider组件中的is Trigger勾选，在运行游戏可以发现小球能够直接穿过PickUp，is Trigger选项意思是碰撞体是否作为触发器使用。当PickUp作为一个触发器使用时，如果小球进入了PickUp，小球就会调用一个方法<strong id="i">OnTriggerEnter(Collider other)</strong>，这个方法会将PickUp的Collider作为参数other传进来，可以用other做一些事，比如消灭这个PickUp。</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="comment">//在PlayerController中添加方法OnTriggerEnter(Collider other)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">OnTriggerEnter</span>(<span class="params">Collider other</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    other.gameObject.SetActive(<span class="literal">false</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>更新游戏，发现小球碰到PickUp时会将PickUp消灭。</p>
+<p>但是，这里有一个问题，如果有多个Trigger，每个Trigger有不同的作用，如果代码写成上面那样，小球进入任何Trigger都会将它消灭，而不是让Trigger产生预期的作用。那么，需要让小球知道，只有进入PickUp这个Trigger时才将它消灭。</p>
+<p>可以通过  <strong id="j">Tag</strong>   对PickUp的Trigger进行标记。</p>
+<p>先添加PickUp标签，再选中PickUp</p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142326809.png" alt="image-20231213142326809"></p>
+<p>修改PlayerController，使用<strong id="k">CompareTag</strong>方法</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">OnTriggerEnter</span>(<span class="params">Collider other</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//如果Tag等于PickUp，则消除它</span></span><br><span class="line">    <span class="keyword">if</span>(other.gameObject.CompareTag(<span class="string">&quot;PickUp&quot;</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        other.gameObject.setActive(<span class="string">&quot;false&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>游戏中往往有很多个PickUp，所以要将PickUp这个GameObject重复利用。将PickUp制成<strong id="l">Prefab(预制体)</strong> ，创建一个Prefabs文件夹，只需要将PickUp从Hierarchy窗口拖拽到Prefabs文件夹即可，此时PickUp将变成蓝色。</p>
+<p>在游戏场景内创建多个PickUp可以选中PickUp然后Crtl+D复制再拖动，也可以打开Prefabs文件夹将预制体往Scene界面拖拽。</p>
+<p>要保持规整性，可以点击Scene视图右上角的y切换到俯视图模式</p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142337068.png" alt="image-20231213142337068"></p>
+<p>俯视图模式下拖拽物体不会对y轴产生影响，所以可以很方便的放置预制体</p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142345823.png" alt="image-20231213142345823"></p>
+<p>最后将所有PickUp用一个空GameObject归纳起来。</p>
+<p>现在游戏已经基本成型了，但还是缺点乐趣，玩家不能直观地看出自己已经收集了多少个PickUp，就算收集了所有PickUp，也没有什么成就感。</p>
+<p>现在需要游戏本身与玩家进行交互，所以需要有<strong id="m">UI</strong>（User Interface），系统和用户交互的界面。</p>
+<p>首先需要一个计数栏，对玩家收集的PickUp进行记录。选择Unity UI中的<strong id="n">Text-TextMeshPro</strong>来制作。</p>
+<p>在Hierarchy窗口中右键 -&gt; UI -&gt; Text-TextMeshPro，修改它的名字为Count，将文本修改如下</p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213211206744.png" alt="image-20231213211206744"></p>
+<p>将收集信息Count放在游戏界面左上角是个不错的想法，选中Count，点击<strong id="o">Rect Transform</strong>下方的双矩形图标，可以快速修改<strong id="p">pivot</strong>和position，</p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213211222631.png" alt="image-20231213211222631"></p>
+<p>按住shift和alt再点击左上角的矩形，这时锚点和文体框的位置都会移到游戏界面左上方，再对位置进行微调，让他处在完美的位置。Rect Transform中的Pos X和Pox Y都是相对于锚点的位置。</p>
+<p>如果文本比较长，要对文本框的宽度和高度进行设置，避免溢出导致变形。</p>
+<p>文本框已经加到游戏界面中了，现在需要在游戏角色收集PickUp时更新Count的输出。</p>
+<p>在PlayerController中添加代码，完善后的代码为</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ++表示新加入的代码</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">PlayerController</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> speed = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">private</span> Rigidbody rb;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">float</span> movementX;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">float</span> movementY;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">int</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ++  用以存放</span></span><br><span class="line">    <span class="keyword">public</span> TMP_Text countNum;</span><br><span class="line">    <span class="comment">// Start is called before the first frame update</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        rb = GetComponent&lt;Rigidbody&gt;();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">OnMove</span>(<span class="params">InputValue input</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        movementX = input.Get&lt;Vector2&gt;().x;</span><br><span class="line">        movementY= input.Get&lt;Vector2&gt;().y;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//++ Update刷新count显示内容，手机玩所有小球显示胜利</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        countNum.text = <span class="string">&quot;Count :&quot;</span> + count.ToString();</span><br><span class="line">        <span class="keyword">if</span> (count == <span class="number">13</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            countNum.text = <span class="string">&quot;YOU WIN !!! CONGRATULATIONS!!!&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Update is called once per frame</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">FixedUpdate</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        rb.AddForce(<span class="keyword">new</span> Vector3(movementX,<span class="number">0</span>,movementY)*speed);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">OnTriggerEnter</span>(<span class="params">Collider other</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (other.gameObject.CompareTag(<span class="string">&quot;PickUp&quot;</span>))</span><br><span class="line">        &#123;</span><br><span class="line">            other.gameObject.SetActive(<span class="literal">false</span>);</span><br><span class="line">            count++;</span><br><span class="line">        &#125;      </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>到这里，Roll A Ball 整个游戏的开发流程就结束了。</p>
+<p>因为游戏比较简单，所以简单测试功能正常就OK了。</p>
+<p>接下来是打包。</p>
+<p>游戏比较小，所以窗口化游玩是个不错的选择。</p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142406093.png" alt="image-20231213142406093"></p>
+<p>点击左下角的Player Settings，设置窗口化</p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142418377.png" alt="image-20231213142418377"></p>
+<p>OK，退出点击Build。</p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142440321.png" alt="image-20231213142440321"></p>
+<p>试玩游戏</p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142459627.png" alt="image-20231213142459627"></p>
+<p>通关了自己的游戏，Amzing！！！</p>
+<p>总结：</p>
+<p>获得自己亲手完成的游戏作品无疑是对自己最大的鼓励。在制作的流程中还有许多不理解的地方，比如一些组件的使用，一些组件里的属性的作用等。长路漫漫，漫漫长路，都是收获之路。</p>
+<p>参考：</p>
+<p>[Unity官方教程Roll A Ball](<a href="https://space.bilibili.com/386224375/search/video?keyword=roll">Unity官方的个人空间-Unity官方个人主页-哔哩哔哩视频 (bilibili.com)</a>)</p>
+]]></content>
+      <categories>
+        <category>Unity3D</category>
+      </categories>
+      <tags>
+        <tag>Unity3D基础</tag>
+        <tag>简单小游戏</tag>
+        <tag>教程学习</tag>
       </tags>
   </entry>
   <entry>

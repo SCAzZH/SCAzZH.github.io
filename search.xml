@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>启</title>
+    <url>/2023/12/12/%E5%90%AF/</url>
+    <content><![CDATA[<blockquote>
+<p>业精于勤，荒于嬉；行成于思，毁于随。						——【唐】韩愈《进学解》</p>
+</blockquote>
+<blockquote>
+<p>不积跬步，无以至千里；不积小流，无以成江海。		——【战国】荀子《劝学》</p>
+</blockquote>
+<p>要说为什么想写博客，其主要的原因是自己总是学多积少，又很懒，但是野心很大，什么都想学，但是总是不积累，不积累就不容易反思，不容易反思就导致自己总是在门外徘徊，刚进门尝到了甜头就开始原地享受，最终发现自己学什么都是半吊子。</p>
+<p>以前认为写博客是很浪费时间的行为，写的东西也大多是知识点，相当于把百度百科移植了一般，就算自己写了文章也很少会回头看，越写越没有动力，味同嚼蜡。这种循环怎么能让人坚持下去呢。</p>
+<p>直到自己真正做完一个项目，用心的写完自己一步步实践的过程和过程中遇到的问题的解决方法与反思，一看时间已是凌晨2点多，但是奇怪的是自己并不累，而且感觉到十分满足的时候，我才明白什么是高级的快乐。</p>
+<blockquote>
+<p>学而不思则罔，思而不学则殆。									——【春秋】《论语·为政》</p>
+</blockquote>
+<p>圣人不愧是圣人，只有自己亲身体会，才能感悟话中的含义。</p>
+]]></content>
+      <categories>
+        <category>感悟</category>
+      </categories>
+      <tags>
+        <tag>杂谈</tag>
+        <tag>非技术</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Roll A Ball</title>
     <url>/2023/12/12/Roll%20A%20Ball%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<p>Get：<a href="#p">urp配置文件	Material</a>	Smoothness	Input System	Rigidbody（刚体）	OnMove(InputValue input)	碰撞体(Collider)	层级管理	OnTriggerEnter(Collider other)	Tag	CompareTag	Prefab(预制体)	UI	Text-TextMeshPro	Rect Transform	pivot</p>
@@ -11,7 +36,7 @@
 <blockquote>
 <p>游戏场景示例</p>
 </blockquote>
-<p><img src="/%5Cimgs%5Cimages%5Cimage-20231211125152751.png" alt="image-20231211125152751"></p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic//main/pic/image-20231213141914491.png" alt="image-20231213141914491"></p>
 <blockquote>
 <p>游戏设计思路</p>
 </blockquote>
@@ -42,14 +67,11 @@
 </blockquote>
 <p><strong>创建项目</strong></p>
 <p>选择 3D Sample Scene(URP) 模板</p>
-<p><img src="/%5Cimgs%5Cimages%5Cimage-20231211132345869.png" alt="image-20231211132345869"></p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic//main/pic/image-20231213141950028.png" alt="image-20231213141950028"></p>
 <p>其他设置</p>
-<p><img src="/%5Cimgs%5Cimages%5Cimage-20231211132432591.png" alt="image-20231211132432591"></p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic//main/pic/image-20231213142027653.png" alt="image-20231213142027653"></p>
 <p>经过一万年后，创建好的项目模板如下</p>
-<p><img src="/%5Cimgs%5Cimages%5Cimage-20231211132813238.png" alt="image-20231211132813238"></p>
-<point id="p"/>
-这是一个示例Sence，用来展示URP的效果，将模板中所有文件存放到一个新建的Template文件夹，暂时不能删掉，因为里面有urp配置文件，如果删掉urp渲染将加载不出来。
-
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic//main/pic/image-20231213142102314.png" alt="image-20231213142102314"><br>这是一个示例Sence，用来展示URP的效果，将模板中所有文件存放到一个新建的Template文件夹，暂时不能删掉，因为里面有urp配置文件，如果删掉urp渲染将加载不出来。</p>
 <p>将示例Sence保存，然后新建一个Sence，新建一个Sence文件夹，将Sence保存在文件夹里。</p>
 <p>我这里将示例文件里的urp配置提取了出来，然后保存在Setting文件夹中。</p>
 <p>现在Sence界面还是一片空白。根据游戏设计思路，要先创建一个基本的游戏平台和游戏角色。</p>
@@ -57,24 +79,24 @@
 <p>一个物体的坐标是是物体中心的坐标</p>
 </blockquote>
 <p>新建一个Plane作为游戏的平台，命名为Ground，重置transform，将Scale改为（2,1,2），Plane的大小是10*10个网格。</p>
-<p><img src="/%5Cimgs%5Cimages%5Cimage-20231211151038751.png" alt="image-20231211151038751"></p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic//main/pic/image-20231213142125371.png" alt="image-20231213142125371"></p>
 <p>将新建一个Materials文件夹，Material是有游戏中的材质，如游戏角色的颜色，贴图等。在Material文件夹中新建一个<em><strong>Material</strong></em>，命名为Ground，将它拖拽到Hierarchy中的Ground这个GameObject上，这个Material将作为Ground的材质Ground进行渲染。设置它的<em><strong>Smoothness</strong></em>为0.25，将它的取色器RGB改为（170，170，170），完成后Ground的样式如下</p>
-<p><img src="/%5Cimgs%5Cimages%5Cimage-20231211151138469.png" alt="image-20231211151138469"></p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic//main/pic/image-20231213142139848.png" alt="image-20231213142139848"></p>
 <p>平台建立好后，需要创建游戏角色。新建一个Sphere，重命名为Player，将它的Transform重置后看到小球有一半在平台下方，将它的Transform中的Position中的y改为0.5可以看到小球刚好利于平面中间，默认的小球颜色不好看，所以要为它创建一个Material，使这个小球更具个性。随便设置一个颜色，修改Smoothness为0.75使小球看起来更光滑，示例如下</p>
-<p><img src="/%5Cimgs%5Cimages%5Cimage-20231211152011389.png" alt="image-20231211152011389"></p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic//main/pic/image-20231213142151172.png" alt="image-20231213142151172"></p>
 <p>现在已经完成了平台和游戏角色的创建，现在要让玩家能够控制小球的移动，此时需要编写脚本，新建一个Scripts文件夹，将所有的脚本文件都存放在Scripts文件夹中，新建一个C# script文件，命名为PlayerController，也可以直接在Player的inspector窗口的最下方Add Component中新建Script，这样新建的script将直接挂载到Player上，在文件夹中创建的script可以通过拖拽的方式将script挂载到GameObject上。</p>
 <p>在编写脚本之前，在Windows -&gt; Package Manage中安装一个<em><strong>Input System</strong></em>，这使Unity官方的一个插件，用于获取输入并于游戏行为进行交互。</p>
 <p>在Player的Inspector窗口中添加一个Player Input组件</p>
-<p><img src="/%5Cimgs%5Cimages%5Cimage-20231211153235866.png" alt="image-20231211153235866"></p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic//main/pic/image-20231213142207514.png" alt="image-20231213142207514"></p>
 <p>点击Create Actions，系统会自动提醒要将文件保存到哪里，新建一个Inputs文件夹用以保存这个文件。其实现在输入wasd已经和游戏关联起来了，只需要取到输入的值，再根据值对Player进行物理作用就可以了，对一个GameObject进行物理作用需要给它添加一个组件<em><strong>Rigidbody（刚体）</strong></em>，对一个物体施加力就是对刚体施加力，开始编写代码</p>
 <figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="comment">//需要使用InputSystem</span></span><br><span class="line"><span class="keyword">using</span> UnityEngine.InputSystem;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//要获取键盘输入的值，对小球施加力</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">PlayerController</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;    </span><br><span class="line">    <span class="comment">//用于获取刚体,不需要其他组件访问，所以私有</span></span><br><span class="line">    <span class="keyword">private</span> Rigidbody rb;</span><br><span class="line">    <span class="comment">//用于获取键盘输入的向量大小</span></span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">float</span> movemenetX;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">float</span> movementY;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//speed用以设置游戏角色的速度</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> speed = <span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Start is called before the first frame update</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//在游戏开始时获取刚体</span></span><br><span class="line">        rb = GetComponent&lt;Rigidbody&gt;();</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//OnMove是InputSystem提供的一个函数，下方解释</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">OnMove</span>(<span class="params">InputValue input</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//input只能获取Vector2的值，此处的x，y在Unity3D中对应x，z</span></span><br><span class="line">        movementX = input.Get&lt;Vector2&gt;().x;</span><br><span class="line">        movementY = input.Get&lt;Vector2&gt;().y;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//力的作用都用FixedUpdate</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">FixedUpdate</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//对Player的刚体施加力，参数是Vector3，本游戏只在x，z轴运动，所以新建Vector3将y的力设为0</span></span><br><span class="line">        rb.AddForce(<span class="keyword">new</span> 				Vector3(movementX,<span class="number">0</span>,movemenetY)*speed);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>***OnMove(InputValue input)***的来源</p>
 <p>打开Inputs文件夹</p>
-<p><img src="/%5Cimgs%5Cimages%5Cimage-20231211161656891.png" alt="image-20231211161656891"></p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic//main/pic/image-20231213142226660.png" alt="image-20231213142226660"></p>
 <p>打开这个Roll A Ball</p>
-<p><img src="/%5Cimgs%5Cimages%5Cimage-20231211161729201.png" alt="image-20231211161729201"></p>
-<p><img src="/%5Cimgs%5Cimages%5Cimage-20231211162016033.png" alt="image-20231211162016033"></p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic//main/pic/image-20231213142258491.png" alt="image-20231213142258491"></p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic//main/pic/image-20231213142242440.png" alt="image-20231213142242440"></p>
 <p>发现Actions有三种Move、Look、Fire，Move下方有WASD，在按下WASD时，会调用OnMove(InputValue input)方法，它会传入一个InputValue类型的参数，InputValue类有一个Get泛型方法，可以返回Vector2类型的值，这个值就是玩家键盘的输入，w、s对应x，a、d对应y。获取到这个值，再通过这个值对Player刚体施加力，就能实现键盘控制小球移动。</p>
 <p>将代码挂载好后，玩家就可以对小球进行控制。</p>
 <p>游戏的基本骨架已经完成了，接下来是丰富游戏内容，优化游戏体验，建立游戏玩法。</p>
@@ -84,7 +106,7 @@
 </blockquote>
 <p>为Wall建立一个Material。</p>
 <p>四面Wall创建好后可以用一个Create Empty创建一个空Object，然后命名为Walls用来作为四个Wall的父容器，方便管理，只需要全选Wall然后将它们拖拽到Walls处。</p>
-<p><img src="/%5Cimgs%5Cimages%5Cimage-20231211194150272.png" alt="image-20231211194150272"></p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic//main/pic/image-20231213142313351.png" alt="image-20231213142313351"></p>
 <p>如果是大型项目的话会有很多gameObject，Hierarchy窗口会很乱，所以要养成这种<em><strong>层级管理</strong></em>的意识。</p>
 <p>接下来，让摄像机跟随Player移动，使游戏体验效果更好。为摄像机附加一个Script，需要达到的效果是：小球移动时，游戏界面跟随小球的移动而移动。</p>
 <p>这个脚本需要获取相机相对于小球位置的向量，动态获取小球移动后的位置，用小球的移动后的位置加小球相距相机的位置。</p>
@@ -103,16 +125,16 @@
 <p>但是，这里有一个问题，如果有多个Trigger，每个Trigger有不同的作用，如果代码写成上面那样，小球进入任何Trigger都会将它消灭，而不是让Trigger产生预期的作用。那么，需要让小球知道，只有进入PickUp这个Trigger时才将它消灭。</p>
 <p>可以通过  <em><strong>Tag</strong></em>   对PickUp的Trigger进行标记。</p>
 <p>先添加PickUp标签，再选中PickUp</p>
-<p><img src="/%5Cimgs%5Cimages%5Cimage-20231211192647616.png" alt="image-20231211192647616"></p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic//main/pic/image-20231213142326809.png" alt="image-20231213142326809"></p>
 <p>修改PlayerController，使用<em><strong>CompareTag</strong></em>方法</p>
 <figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">OnTriggerEnter</span>(<span class="params">Collider other</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//如果Tag等于PickUp，则消除它</span></span><br><span class="line">    <span class="keyword">if</span>(other.gameObject.CompareTag(<span class="string">&quot;PickUp&quot;</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        other.gameObject.setActive(<span class="string">&quot;false&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>游戏中往往有很多个PickUp，所以要将PickUp这个GameObject重复利用。将PickUp制成<em><strong>Prefab(预制体)</strong></em> ，创建一个Prefabs文件夹，只需要将PickUp从Hierarchy窗口拖拽到Prefabs文件夹即可，此时PickUp将变成蓝色。</p>
 <p>在游戏场景内创建多个PickUp可以选中PickUp然后Crtl+D复制再拖动，也可以打开Prefabs文件夹将预制体往Scene界面拖拽。</p>
 <p>要保持规整性，可以点击Scene视图右上角的y切换到俯视图模式</p>
-<p><img src="/%5Cimgs%5Cimages%5Cimage-20231211194749843.png" alt="image-20231211194749843"></p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic//main/pic/image-20231213142337068.png" alt="image-20231213142337068"></p>
 <p>俯视图模式下拖拽物体不会对y轴产生影响，所以可以很方便的放置预制体</p>
-<p><img src="/%5Cimgs%5Cimages%5Cimage-20231211194942611.png" alt="image-20231211194942611"></p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic//main/pic/image-20231213142345823.png" alt="image-20231213142345823"></p>
 <p>最后将所有PickUp用一个空GameObject归纳起来。</p>
 <p>现在游戏已经基本成型了，但还是缺点乐趣，玩家不能直观地看出自己已经收集了多少个PickUp，就算收集了所有PickUp，也没有什么成就感。</p>
 <p>现在需要游戏本身与玩家进行交互，所以需要有<em><strong>UI</strong></em>（User Interface），系统和用户交互的界面。</p>
@@ -131,13 +153,13 @@
 <p>因为游戏比较简单，所以简单测试功能正常就OK了。</p>
 <p>接下来是打包。</p>
 <p>游戏比较小，所以窗口化游玩是个不错的选择。</p>
-<p><img src="/%5Cimgs%5Cimages%5Cimage-20231211205030113.png" alt="image-20231211205030113"></p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic//main/pic/image-20231213142406093.png" alt="image-20231213142406093"></p>
 <p>点击左下角的Player Settings，设置窗口化</p>
-<p><img src="/%5Cimgs%5Cimages%5Cimage-20231211205117133.png" alt="image-20231211205117133"></p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic//main/pic/image-20231213142418377.png" alt="image-20231213142418377"></p>
 <p>OK，退出点击Build。</p>
-<p><img src="/%5Cimgs%5Cimages%5Cimage-20231211205709847.png" alt="image-20231211205709847"></p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic//main/pic/image-20231213142440321.png" alt="image-20231213142440321"></p>
 <p>试玩游戏</p>
-<p><img src="/%5Cimgs%5Cimages%5Cimage-20231211205816195.png" alt="image-20231211205816195"></p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic//main/pic/image-20231213142459627.png" alt="image-20231213142459627"></p>
 <p>通关了自己的游戏，Amzing！！！</p>
 <p>总结：</p>
 <p>获得自己亲手完成的游戏作品无疑是对自己最大的鼓励。在制作的流程中还有许多不理解的地方，比如一些组件的使用，一些组件里的属性的作用等。长路漫漫，漫漫长路，都是收获之路。</p>
@@ -151,31 +173,6 @@
         <tag>Unity3D基础</tag>
         <tag>简单小游戏</tag>
         <tag>教程学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>启</title>
-    <url>/2023/12/12/%E5%90%AF/</url>
-    <content><![CDATA[<blockquote>
-<p>业精于勤，荒于嬉；行成于思，毁于随。						——【唐】韩愈《进学解》</p>
-</blockquote>
-<blockquote>
-<p>不积跬步，无以至千里；不积小流，无以成江海。		——【战国】荀子《劝学》</p>
-</blockquote>
-<p>要说为什么想写博客，其主要的原因是自己总是学多积少，又很懒，但是野心很大，什么都想学，但是总是不积累，不积累就不容易反思，不容易反思就导致自己总是在门外徘徊，刚进门尝到了甜头就开始原地享受，最终发现自己学什么都是半吊子。</p>
-<p>以前认为写博客是很浪费时间的行为，写的东西也大多是知识点，相当于把百度百科移植了一般，就算自己写了文章也很少会回头看，越写越没有动力，味同嚼蜡。这种循环怎么能让人坚持下去呢。</p>
-<p>直到自己真正做完一个项目，用心的写完自己一步步实践的过程和过程中遇到的问题的解决方法与反思，一看时间已是凌晨2点多，但是奇怪的是自己并不累，而且感觉到十分满足的时候，我才明白什么是高级的快乐。</p>
-<blockquote>
-<p>学而不思则罔，思而不学则殆。									——【春秋】《论语·为政》</p>
-</blockquote>
-<p>圣人不愧是圣人，只有自己亲身体会，才能感悟话中的含义。</p>
-]]></content>
-      <categories>
-        <category>感悟</category>
-      </categories>
-      <tags>
-        <tag>杂谈</tag>
-        <tag>非技术</tag>
       </tags>
   </entry>
 </search>

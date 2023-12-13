@@ -1,16 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Git和GitHub基本使用</title>
-    <url>/2023/12/13/Git%E5%92%8CGitHub%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<h2 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h2><p>GitHub是全球最大的同行交友网站。DX</p>
-]]></content>
-      <tags>
-        <tag>Git</tag>
-        <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo博客搭建流程</title>
     <url>/2023/12/11/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/</url>
     <content><![CDATA[<p>此文章用于记录本博客搭建过程及一些心得体会，本博客的搭建采用以下对象：</p>
@@ -158,6 +148,16 @@
         <tag>Hexo</tag>
         <tag>Butterfly主题</tag>
         <tag>GitHub</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git和GitHub基本使用</title>
+    <url>/2023/12/13/Git%E5%92%8CGitHub%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h2 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h2><p>GitHub是全球最大的同行交友网站。DX</p>
+]]></content>
+      <tags>
+        <tag>Git</tag>
+        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -311,6 +311,31 @@
       </tags>
   </entry>
   <entry>
+    <title>启</title>
+    <url>/2023/12/12/%E5%90%AF/</url>
+    <content><![CDATA[<blockquote>
+<p>业精于勤，荒于嬉；行成于思，毁于随。						——【唐】韩愈《进学解》</p>
+</blockquote>
+<blockquote>
+<p>不积跬步，无以至千里；不积小流，无以成江海。		——【战国】荀子《劝学》</p>
+</blockquote>
+<p>要说为什么想写博客，其主要的原因是自己总是学多积少，又很懒，但是野心很大，什么都想学，但是总是不积累，不积累就不容易反思，不容易反思就导致自己总是在门外徘徊，刚进门尝到了甜头就开始原地享受，最终发现自己学什么都是半吊子。</p>
+<p>以前认为写博客是很浪费时间的行为，写的东西也大多是知识点，相当于把百度百科移植了一般，就算自己写了文章也很少会回头看，越写越没有动力，味同嚼蜡。这种循环怎么能让人坚持下去呢。</p>
+<p>直到自己真正做完一个项目，用心的写完自己一步步实践的过程和过程中遇到的问题的解决方法与反思，一看时间已是凌晨2点多，但是奇怪的是自己并不累，而且感觉到十分满足的时候，我才明白什么是高级的快乐。</p>
+<blockquote>
+<p>学而不思则罔，思而不学则殆。									——【春秋】《论语·为政》</p>
+</blockquote>
+<p>圣人不愧是圣人，只有自己亲身体会，才能感悟话中的含义。</p>
+]]></content>
+      <categories>
+        <category>感悟</category>
+      </categories>
+      <tags>
+        <tag>杂谈</tag>
+        <tag>非技术</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>博客问题总结</title>
     <url>/2023/12/11/%E5%8D%9A%E5%AE%A2%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<blockquote>
@@ -337,30 +362,5 @@
       <categories>
         <category>问题</category>
       </categories>
-  </entry>
-  <entry>
-    <title>启</title>
-    <url>/2023/12/12/%E5%90%AF/</url>
-    <content><![CDATA[<blockquote>
-<p>业精于勤，荒于嬉；行成于思，毁于随。						——【唐】韩愈《进学解》</p>
-</blockquote>
-<blockquote>
-<p>不积跬步，无以至千里；不积小流，无以成江海。		——【战国】荀子《劝学》</p>
-</blockquote>
-<p>要说为什么想写博客，其主要的原因是自己总是学多积少，又很懒，但是野心很大，什么都想学，但是总是不积累，不积累就不容易反思，不容易反思就导致自己总是在门外徘徊，刚进门尝到了甜头就开始原地享受，最终发现自己学什么都是半吊子。</p>
-<p>以前认为写博客是很浪费时间的行为，写的东西也大多是知识点，相当于把百度百科移植了一般，就算自己写了文章也很少会回头看，越写越没有动力，味同嚼蜡。这种循环怎么能让人坚持下去呢。</p>
-<p>直到自己真正做完一个项目，用心的写完自己一步步实践的过程和过程中遇到的问题的解决方法与反思，一看时间已是凌晨2点多，但是奇怪的是自己并不累，而且感觉到十分满足的时候，我才明白什么是高级的快乐。</p>
-<blockquote>
-<p>学而不思则罔，思而不学则殆。									——【春秋】《论语·为政》</p>
-</blockquote>
-<p>圣人不愧是圣人，只有自己亲身体会，才能感悟话中的含义。</p>
-]]></content>
-      <categories>
-        <category>感悟</category>
-      </categories>
-      <tags>
-        <tag>杂谈</tag>
-        <tag>非技术</tag>
-      </tags>
   </entry>
 </search>

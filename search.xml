@@ -3,12 +3,81 @@
   <entry>
     <title>Git和GitHub基本使用</title>
     <url>/2023/12/13/Git%E5%92%8CGitHub%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<h2 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h2><p>GitHub是全球最大的同行交友网站。DX</p>
+    <content><![CDATA[<h2 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h2><h3 id="设置用户名密码："><a href="#设置用户名密码：" class="headerlink" title="设置用户名密码："></a>设置用户名密码：</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git config --global user.name <span class="string">&quot;Your Name&quot;</span></span><br><span class="line">$ git confit --global user.email <span class="string">&quot;emailUrl&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="查看用户名信息"><a href="#查看用户名信息" class="headerlink" title="查看用户名信息"></a>查看用户名信息</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git config --list</span><br></pre></td></tr></table></figure>
+
+<h3 id="生成本地ssh密钥"><a href="#生成本地ssh密钥" class="headerlink" title="生成本地ssh密钥"></a>生成本地ssh密钥</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">&quot;1483221150@qq.com&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>-t 指定密钥类型，默认是 rsa ，可以省略。<br>-C 设置注释文字，比如邮箱。<br>-f 指定密钥文件存储文件名。</p>
+<h3 id="查看密钥"><a href="#查看密钥" class="headerlink" title="查看密钥"></a>查看密钥</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/.ssh</span><br><span class="line">$ <span class="built_in">ls</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h3><p>将要修改的东西加入暂存区</p>
+<p>Git命令不会施加于空文件夹，git add一个文件夹实际上是文件夹中的所有文件，不是文件夹本身。文件夹里新增一个文件必须加入暂存区，不然不参与版本控制。</p>
+<p>每次提交，分支会指向最后一次提交，将上次提交作为父节点。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git init  <span class="comment">#建立工作区</span></span><br><span class="line">$ git add &lt;文件名&gt;  <span class="comment">#将要修改的文件加入暂存区</span></span><br><span class="line">$ git commit  提交所有<span class="comment">#</span></span><br><span class="line">$ git commit &lt;文件名&gt; <span class="comment">#提交一个文件</span></span><br><span class="line">$ git reset		<span class="comment">#将最后一次提交替换暂存区文件</span></span><br><span class="line">$ git checkout &lt;文件名&gt;	 <span class="comment">#将暂存区文件转入工作目录</span></span><br><span class="line">$ git checkout &lt;分支名&gt; <span class="comment">#转到分支</span></span><br></pre></td></tr></table></figure>
+
+<p>可以使用</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git checkout &lt;某提交sha-1&gt;			<span class="comment">#切换到某提交</span></span><br><span class="line">$ git branch &lt;新分支名&gt;	<span class="comment">#创建新分支</span></span><br></pre></td></tr></table></figure>
+
+<p>推送到远程库</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git push &lt;远程主机名&gt; &lt;本地分支名&gt;:&lt;远程分支名&gt;</span><br><span class="line">$ git push &lt;远程主机名&gt; &lt;本地分支名&gt;			<span class="comment">#远程本地分支名相同</span></span><br><span class="line">$ git push origin --delete master		<span class="comment">#提交并删除本地分支</span></span><br><span class="line">$ git push --force origin master		<span class="comment">#有版本差异，但强制推送</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h2 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h2><p>掌握：</p>
+<ul>
+<li><p>添加ssh</p>
+</li>
+<li><p>新建仓库+ReadMe.md初始化</p>
+</li>
+<li><p>pull合并分支</p>
+</li>
+</ul>
+<h3 id="添加一个ssh-key"><a href="#添加一个ssh-key" class="headerlink" title="添加一个ssh key"></a>添加一个ssh key</h3><p>如果已经生成rsa密钥,没有则先生成，拷贝公钥内容：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ clip &lt; ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
+
+<p>GitHub右上角Settings &#x3D;&gt; SSH and GPG keys &#x3D;&gt; New SSH Key </p>
+<p>将内容复制进去保存，然后以后就可以用给SSH地址了</p>
 ]]></content>
       <tags>
         <tag>Git</tag>
         <tag>Linux</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>博客问题总结</title>
+    <url>/2023/12/11/%E5%8D%9A%E5%AE%A2%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<blockquote>
+<p>此文用以记录搭建和使用博客中遇到的问题</p>
+</blockquote>
+<h2 id="图床问题"><a href="#图床问题" class="headerlink" title="图床问题"></a>图床问题</h2><p>图床问题是静态博客都会遇到的问题。因为文章采用Markdown语法，所以文章中的图片使用url来引用，可以使用本地地址或网络地址，要在网络中显示就必须使用网络地址。所以必须要有一个存放图片的地方。</p>
+<p>本博客使用图床：GitHub（有时访问会很慢）</p>
+<p>搜索了很多免费图床，大多都存在不稳定或有跑路可能（导致图片全体丢失，如果没有备份后果会很严重）。综合来说，虽然GitHub作为图床有时访问会比较慢，但是它几乎不可能跑路，并且不限空间，使用非常方便。不过GitHub作为图床的仓库将会是公开的，所以如果十分注重隐私的话建议选择其他图床。</p>
+<p>图床上传工具PicGo</p>
+<ul>
+<li><a href="https://picgo.github.io/PicGo-Doc/zh/">PicGo</a></li>
+</ul>
+<p>它支持以GitHub作为图床，配置简单，并且Typora也支持PicGo上传图片，可谓是一条龙服务。</p>
+<p>Typora设置：</p>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213232651986.png" alt="image-20231213232651986"></p>
+<p>PicGo设置：<br><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213233108701.png" alt="image-20231213233108701"></p>
+<blockquote>
+<p>Token在账户的Settings（点击右上角头像）里的Developer Settings里生成，生成的Token要立即复制备份，它只会显示一次。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213233617099.png" alt="image-20231213233617099"></p>
+<p>自定义域名：图片的url，用于访问图片。</p>
+<p>GitHub图床访问格式：<a href="https://raw.githubusercontent.com/%E7%94%A8%E6%88%B7%E5%90%8D/%E4%BB%93%E5%BA%93%E5%90%8D/%E5%88%86%E6%94%AF">https://raw.githubusercontent.com/用户名/仓库名/分支</a></p>
+]]></content>
+      <categories>
+        <category>问题</category>
+      </categories>
   </entry>
   <entry>
     <title>Hexo博客搭建流程</title>
@@ -295,7 +364,7 @@
 <p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142440321.png" alt="image-20231213142440321"></p>
 <p>试玩游戏</p>
 <p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213142459627.png" alt="image-20231213142459627"></p>
-<p>通关了自己的游戏，Amzing！！！</p>
+<p>通关了自己的游戏，Amazing！！！</p>
 <p>总结：</p>
 <p>获得自己亲手完成的游戏作品无疑是对自己最大的鼓励。在制作的流程中还有许多不理解的地方，比如一些组件的使用，一些组件里的属性的作用等。长路漫漫，漫漫长路，都是收获之路。</p>
 <p>参考：</p>
@@ -309,34 +378,6 @@
         <tag>简单小游戏</tag>
         <tag>教程学习</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>博客问题总结</title>
-    <url>/2023/12/11/%E5%8D%9A%E5%AE%A2%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<blockquote>
-<p>此文用以记录搭建和使用博客中遇到的问题</p>
-</blockquote>
-<h2 id="图床问题"><a href="#图床问题" class="headerlink" title="图床问题"></a>图床问题</h2><p>图床问题是静态博客都会遇到的问题。因为文章采用Markdown语法，所以文章中的图片使用url来引用，可以使用本地地址或网络地址，要在网络中显示就必须使用网络地址。所以必须要有一个存放图片的地方。</p>
-<p>本博客使用图床：GitHub（有时访问会很慢）</p>
-<p>搜索了很多免费图床，大多都存在不稳定或有跑路可能（导致图片全体丢失，如果没有备份后果会很严重）。综合来说，虽然GitHub作为图床有时访问会比较慢，但是它几乎不可能跑路，并且不限空间，使用非常方便。不过GitHub作为图床的仓库将会是公开的，所以如果十分注重隐私的话建议选择其他图床。</p>
-<p>图床上传工具PicGo</p>
-<ul>
-<li><a href="https://picgo.github.io/PicGo-Doc/zh/">PicGo</a></li>
-</ul>
-<p>它支持以GitHub作为图床，配置简单，并且Typora也支持PicGo上传图片，可谓是一条龙服务。</p>
-<p>Typora设置：</p>
-<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213232651986.png" alt="image-20231213232651986"></p>
-<p>PicGo设置：<br><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213233108701.png" alt="image-20231213233108701"></p>
-<blockquote>
-<p>Token在账户的Settings（点击右上角头像）里的Developer Settings里生成，生成的Token要立即复制备份，它只会显示一次。</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/scazzh/blogpic/main/pic/image-20231213233617099.png" alt="image-20231213233617099"></p>
-<p>自定义域名：图片的url，用于访问图片。</p>
-<p>GitHub图床访问格式：<a href="https://raw.githubusercontent.com/%E7%94%A8%E6%88%B7%E5%90%8D/%E4%BB%93%E5%BA%93%E5%90%8D/%E5%88%86%E6%94%AF">https://raw.githubusercontent.com/用户名/仓库名/分支</a></p>
-]]></content>
-      <categories>
-        <category>问题</category>
-      </categories>
   </entry>
   <entry>
     <title>启</title>
